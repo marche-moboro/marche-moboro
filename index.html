@@ -1654,6 +1654,7 @@ async function sellerLogin() {
   if (!checkLoginAttempts(code)) return;
 
   try {
+    
     // Vérifier d'abord si c'est un admin
     const { data: adminData } = await db
       .from('admin_credentials')
@@ -1663,11 +1664,13 @@ async function sellerLogin() {
       .maybeSingle();
 
     if (adminData) {
-      resetLoginAttempts(code);
-      showToast('Bienvenue Admin ! 👑', 'success');
-      setTimeout(() => { window.location.href = 'admin.html'; }, 1000);
-      return;
-    }
+  isAdmin = true;
+  resetLoginAttempts(code);
+  showToast('Bienvenue Admin ! 👑', 'success');
+  showPage('adminDashboard');
+  loadAdminStats();
+  return;
+}
 
     // Sinon vérifier vendeur
     const { data: seller, error } = await db
