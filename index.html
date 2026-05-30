@@ -1,0 +1,3275 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marché Moboro - Le meilleur marché local</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>/* ==================== RESET & BASE ==================== */
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+body {
+  background: #f5f7fb;
+  color: #1a1a1a;
+  overflow-x: hidden;
+  padding-bottom: 120px;
+}
+
+.page { display: none; }
+#homePage { display: block; }
+
+/* ==================== HEADER ==================== */
+header {
+  background: linear-gradient(135deg, #1677FF, #0d5bd1);
+  color: white;
+  padding: 12px 15px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0,0,0,.15);
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.header-titles {
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.header-titles.hidden {
+  max-height: 0;
+  margin: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+header h1 { font-size: 26px; font-weight: 700; }
+header p { font-size: 12px; opacity: .85; }
+
+.profile-icon {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.25);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; font-weight: 700; color: white;
+  cursor: pointer;
+  border: 2px solid rgba(255,255,255,.5);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+/* ==================== SEARCH ==================== */
+.search-box {
+  padding: 10px 15px;
+  background: #1677FF;
+  position: sticky;
+  top: 60px;
+  z-index: 999;
+  transition: top 0.3s ease;
+}
+
+.search-box.at-top {
+  top: 0;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 12px 16px;
+  border: none;
+  border-radius: 14px;
+  font-size: 14px;
+  outline: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,.1);
+  background: white;
+}
+
+.search-box.at-top input {
+  box-shadow: 0 2px 8px rgba(0,0,0,.2);
+}
+
+/* ==================== BANNER ==================== */
+.banner { padding: 10px 15px; }
+
+.banner-box {
+  height: 190px;
+  border-radius: 22px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 6px 20px rgba(0,0,0,.15);
+}
+
+.banner-box img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: opacity .3s ease;
+}
+
+.banner-text {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 16px;
+  background: linear-gradient(transparent, rgba(0,0,0,.8));
+  color: white;
+}
+
+.banner-text h2 { font-size: 20px; margin-bottom: 3px; }
+.banner-text p { font-size: 12px; opacity: .9; }
+
+.banner-dots {
+  position: absolute;
+  bottom: 8px; right: 12px;
+  display: flex; gap: 5px;
+}
+
+.dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.5);
+  cursor: pointer;
+  transition: .3s;
+}
+.dot.active { background: white; width: 18px; border-radius: 3px; }
+
+/* ==================== CATEGORIES ==================== */
+.section-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #888;
+  padding: 12px 15px 6px;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+}
+
+.categories { padding: 0 15px 10px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+.cat-btn {
+  background: white;
+  border: none;
+  padding: 16px 12px;
+  border-radius: 16px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,.07);
+  transition: .2s;
+  text-align: center;
+  line-height: 1.4;
+}
+
+.cat-btn:active { transform: scale(.97); }
+.big-btn { grid-column: 1/3; font-size: 15px; padding: 20px; background: #1677FF; color: white; border-radius: 18px; }
+.promo-btn { background: linear-gradient(135deg, #ff4d4f, #d42020); color: white; }
+.register-cat-btn { background: linear-gradient(135deg, #52c41a, #389e0d); color: white; }
+.login-cat-btn { background: #f0f0f0; color: #333; }
+
+/* ==================== SELLERS ==================== */
+.sellers-page, .products-page, .register-page { padding: 15px; }
+
+.page-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.back-btn {
+  background: white;
+  border: none;
+  width: 38px; height: 38px;
+  border-radius: 12px;
+  font-size: 18px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,.1);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+
+.section-title { font-size: 22px; font-weight: 700; }
+.section-subtitle { font-size: 13px; color: #888; margin-top: 2px; }
+
+.seller-card {
+  background: white;
+  border-radius: 20px;
+  margin-bottom: 14px;
+  box-shadow: 0 4px 14px rgba(0,0,0,.08);
+  overflow: hidden;
+}
+
+.seller-image { width: 100%; height: 180px; object-fit: cover; }
+.seller-info { padding: 14px; }
+.seller-info h3 { font-size: 19px; margin-bottom: 4px; }
+.seller-location { font-size: 12px; color: #1677FF; margin-bottom: 6px; }
+.seller-desc { font-size: 13px; color: #666; line-height: 1.5; margin-bottom: 12px; }
+
+.seller-actions { display: flex; gap: 8px; }
+
+.view-btn {
+  flex: 1; background: #1677FF; color: white;
+  border: none; padding: 11px; border-radius: 11px;
+  font-weight: 600; font-size: 13px; cursor: pointer;
+}
+
+.contact-btn {
+  flex: 1; background: #25D366; color: white;
+  padding: 11px; border-radius: 11px;
+  text-align: center; text-decoration: none;
+  font-weight: 600; font-size: 13px;
+  display: flex; align-items: center; justify-content: center; gap: 5px;
+}
+
+/* ==================== PRODUCTS ==================== */
+.product-card {
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 14px;
+  box-shadow: 0 4px 14px rgba(0,0,0,.08);
+}
+
+.product-card img { width: 100%; height: 220px; object-fit: cover; }
+.product-content { padding: 14px; }
+.product-content h3 { font-size: 17px; margin-bottom: 5px; }
+.product-desc { font-size: 13px; color: #666; margin-bottom: 8px; line-height: 1.5; }
+.product-price { font-size: 21px; font-weight: 700; color: #1677FF; margin-bottom: 11px; }
+
+.add-btn {
+  width: 100%; background: #1677FF; color: white;
+  border: none; padding: 13px; border-radius: 12px;
+  font-size: 14px; font-weight: 700; cursor: pointer;
+}
+
+.contact-btn-product {
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  background: #25D366; color: white;
+  padding: 13px; border-radius: 12px;
+  text-decoration: none; font-weight: 700; font-size: 14px;
+  width: 100%;
+}
+
+/* ==================== CART BAR ==================== */
+.cart-bar {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  background: white; padding: 12px 15px;
+  display: none; justify-content: space-between; align-items: center;
+  box-shadow: 0 -4px 20px rgba(0,0,0,.12);
+  z-index: 2000;
+}
+
+.cart-left { display: flex; align-items: center; gap: 10px; }
+
+.cart-circle {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: #1677FF;
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-size: 20px; position: relative;
+}
+
+.cart-count {
+  position: absolute; top: -4px; right: -4px;
+  background: #FFD700; color: black;
+  width: 19px; height: 19px; border-radius: 50%;
+  font-size: 11px; display: flex; align-items: center; justify-content: center;
+  font-weight: 700;
+}
+
+.cart-preview { font-size: 13px; }
+.cart-preview strong { display: block; font-size: 14px; }
+.cart-preview span { color: #1677FF; font-weight: 600; }
+
+.pay-btn {
+  background: #FFD700; border: none;
+  padding: 12px 20px; border-radius: 12px;
+  font-weight: 700; font-size: 14px; cursor: pointer;
+}
+
+/* ==================== MODAL CART ==================== */
+.modal {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.6);
+  display: none; justify-content: center; align-items: flex-start;
+  padding: 15px; padding-top: 20px;
+  z-index: 3000;
+}
+
+.modal-content {
+  background: white; width: 100%; max-width: 420px;
+  border-radius: 24px; padding: 20px;
+  max-height: 92vh; overflow-y: auto;
+  animation: slideUp .3s ease;
+}
+
+.modal-content h2 { font-size: 22px; margin-bottom: 10px; }
+
+.notice {
+  background: #eef5ff; padding: 11px;
+  border-radius: 12px; font-size: 13px;
+  line-height: 1.5; margin-bottom: 14px;
+}
+
+.cart-item {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 11px 12px; background: #f5f7fb;
+  border-radius: 12px; margin-bottom: 8px;
+}
+
+.cart-item-info { font-size: 13px; line-height: 1.6; }
+.cart-item-info strong { display: block; font-size: 14px; }
+.cart-subtotal { color: #1677FF; font-weight: 600; }
+
+.remove-btn {
+  background: #ff4d4f; color: white;
+  border: none; padding: 6px 10px;
+  border-radius: 8px; font-size: 12px; cursor: pointer;
+}
+
+.total {
+  font-size: 22px; font-weight: 700;
+  text-align: center; margin: 14px 0;
+  color: #1677FF;
+}
+
+.modal input {
+  width: 100%; padding: 12px 14px;
+  border-radius: 12px; border: 1px solid #ddd;
+  margin-bottom: 10px; font-size: 14px; outline: none;
+}
+
+.command-btn {
+  width: 100%; background: #25D366; color: white;
+  border: none; padding: 14px; border-radius: 14px;
+  font-size: 15px; font-weight: 700; cursor: pointer;
+  margin-top: 8px;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+
+.close-modal-btn {
+  width: 100%; background: #f0f0f0; border: none;
+  padding: 13px; border-radius: 14px;
+  font-weight: 600; cursor: pointer; margin-top: 8px;
+}
+
+/* ==================== FORMS ==================== */
+.form-card {
+  background: white; padding: 20px;
+  border-radius: 22px;
+  box-shadow: 0 4px 16px rgba(0,0,0,.08);
+  margin-bottom: 15px;
+}
+
+.form-card h2 { font-size: 22px; margin-bottom: 14px; }
+
+.form-card input,
+.form-card select,
+.form-card textarea {
+  width: 100%; padding: 13px 14px;
+  border-radius: 12px; border: 1.5px solid #e8e8e8;
+  margin-bottom: 10px; font-size: 14px; outline: none;
+  transition: border-color .2s;
+  background: #fafafa;
+}
+
+.form-card input:focus,
+.form-card select:focus,
+.form-card textarea:focus { border-color: #1677FF; background: white; }
+
+.form-card textarea { min-height: 100px; resize: none; }
+
+.primary-btn {
+  width: 100%; background: #1677FF; color: white;
+  border: none; padding: 14px; border-radius: 14px;
+  font-size: 15px; font-weight: 700; cursor: pointer;
+  margin-top: 4px;
+}
+
+.secondary-btn {
+  width: 100%; background: #f0f0f0; border: none;
+  padding: 14px; border-radius: 14px;
+  font-size: 15px; font-weight: 600; cursor: pointer;
+  margin-top: 8px;
+}
+
+.green-btn {
+  width: 100%; background: #25D366; color: white;
+  border: none; padding: 14px; border-radius: 14px;
+  font-size: 15px; font-weight: 700; cursor: pointer;
+  margin-top: 8px;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+  text-decoration: none;
+}
+
+.danger-btn {
+  width: 100%; background: #ff4d4f; color: white;
+  border: none; padding: 14px; border-radius: 14px;
+  font-size: 15px; font-weight: 700; cursor: pointer;
+  margin-top: 8px;
+}
+
+/* ==================== INFO BOXES ==================== */
+.info-box {
+  background: #fff4d9; padding: 13px;
+  border-radius: 13px; font-size: 13px;
+  line-height: 1.6; margin-bottom: 14px;
+}
+
+.success-box {
+  background: #f6ffed; border: 1px solid #b7eb8f;
+  padding: 13px; border-radius: 13px;
+  font-size: 13px; line-height: 1.6; margin-bottom: 14px;
+}
+
+.code-box {
+  background: #eef5ff; padding: 14px;
+  border-radius: 13px; font-weight: 700;
+  font-size: 20px; text-align: center;
+  color: #1677FF; margin-bottom: 14px;
+  letter-spacing: 2px;
+}
+
+/* ==================== DASHBOARD ==================== */
+.dash-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+
+.dash-btn {
+  background: white; border: none;
+  padding: 18px 12px; border-radius: 16px;
+  font-size: 13px; font-weight: 600;
+  cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,.07);
+  text-align: center; line-height: 1.4;
+  transition: .2s;
+}
+
+.dash-btn:active { transform: scale(.97); }
+.dash-btn .icon { font-size: 24px; display: block; margin-bottom: 5px; }
+.dash-btn.blue { background: #1677FF; color: white; }
+.dash-btn.green { background: #52c41a; color: white; }
+.dash-btn.orange { background: #fa8c16; color: white; }
+.dash-btn.red { background: #ff4d4f; color: white; }
+.dash-btn.full { grid-column: 1/3; }
+
+.seller-profile-header {
+  display: flex; align-items: center; gap: 14px;
+  padding: 16px; background: white;
+  border-radius: 20px; margin-bottom: 14px;
+  box-shadow: 0 4px 14px rgba(0,0,0,.08);
+}
+
+.seller-avatar {
+  width: 64px; height: 64px; border-radius: 50%;
+  object-fit: cover; border: 3px solid #1677FF;
+}
+
+/* ==================== PROMOS ==================== */
+.promo-card {
+  background: white; border-radius: 20px;
+  overflow: hidden; margin-bottom: 14px;
+  box-shadow: 0 4px 14px rgba(0,0,0,.08);
+}
+
+.promo-card img { width: 100%; height: 200px; object-fit: cover; }
+.promo-content { padding: 14px; }
+.promo-content h3 { font-size: 17px; margin-bottom: 4px; }
+.promo-seller { font-size: 12px; color: #888; margin-bottom: 10px; }
+
+.promo-prices-display { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; }
+.old-price { text-decoration: line-through; color: #999; font-size: 14px; }
+.new-price { color: #ff4d4f; font-weight: 700; font-size: 20px; }
+.discount {
+  background: #ff4d4f; color: white;
+  padding: 3px 8px; border-radius: 8px;
+  font-size: 12px; font-weight: 700;
+}
+
+.whatsapp-promo-btn {
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  background: #25D366; color: white;
+  padding: 12px; border-radius: 12px;
+  text-decoration: none; font-weight: 700; font-size: 14px;
+}
+
+/* ==================== MY PRODUCTS ==================== */
+.my-product-card {
+  display: flex; gap: 12px;
+  background: white; padding: 12px;
+  border-radius: 16px; margin-bottom: 10px;
+  box-shadow: 0 3px 10px rgba(0,0,0,.07);
+  align-items: center;
+}
+
+.my-product-card img {
+  width: 80px; height: 80px;
+  border-radius: 12px; object-fit: cover;
+  flex-shrink: 0;
+}
+
+.my-product-info { flex: 1; }
+.my-product-info strong { display: block; font-size: 14px; margin-bottom: 3px; }
+.my-product-info span { display: block; font-size: 13px; color: #1677FF; font-weight: 600; margin-bottom: 8px; }
+
+.delete-btn {
+  background: #fff0f0; color: #ff4d4f;
+  border: 1px solid #ffccc7; padding: 6px 10px;
+  border-radius: 8px; font-size: 12px; cursor: pointer;
+  font-weight: 600;
+}
+
+/* ==================== PROMO SELECT ==================== */
+.promo-select-card {
+  background: white; border-radius: 16px;
+  padding: 14px; margin-bottom: 12px;
+  box-shadow: 0 3px 10px rgba(0,0,0,.07);
+}
+
+.promo-select-card img { width: 100%; height: 140px; object-fit: cover; border-radius: 12px; margin-bottom: 10px; }
+.promo-prices { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 10px 0; }
+.price-input-group label { font-size: 12px; color: #888; display: block; margin-bottom: 4px; }
+.price-input-group input {
+  width: 100%; padding: 10px; border-radius: 10px;
+  border: 1.5px solid #e8e8e8; font-size: 14px; outline: none;
+}
+
+.promo-transfer-btn {
+  width: 100%; background: #fa8c16; color: white;
+  border: none; padding: 12px; border-radius: 12px;
+  font-weight: 700; cursor: pointer;
+}
+
+/* ==================== SEARCH RESULTS ==================== */
+.search-results-page { padding: 15px; }
+
+/* ==================== ADMIN ==================== */
+.admin-page { padding: 15px; }
+
+.stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
+
+.stat-card {
+  background: white; padding: 16px;
+  border-radius: 16px; text-align: center;
+  box-shadow: 0 3px 10px rgba(0,0,0,.07);
+}
+
+.stat-card .stat-number { font-size: 28px; font-weight: 700; color: #1677FF; }
+.stat-card .stat-label { font-size: 12px; color: #888; margin-top: 3px; }
+
+.admin-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.admin-table th {
+  background: #f5f7fb; padding: 10px 8px;
+  text-align: left; font-size: 12px; color: #888;
+}
+.admin-table td { padding: 10px 8px; border-bottom: 1px solid #f0f0f0; }
+
+.position-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px; background: white;
+  border-radius: 12px; margin-bottom: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.06);
+}
+
+.pos-number { font-weight: 700; color: #1677FF; width: 30px; }
+.pos-name { flex: 1; font-size: 14px; }
+.pos-controls { display: flex; gap: 5px; }
+.pos-controls button {
+  background: #f0f0f0; border: none;
+  padding: 5px 10px; border-radius: 8px;
+  cursor: pointer; font-size: 12px;
+}
+
+/* ==================== CONFIRM DIALOG ==================== */
+.confirm-dialog {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.6);
+  display: none; justify-content: center; align-items: center;
+  z-index: 5000; padding: 20px;
+}
+
+.confirm-content {
+  background: white; padding: 22px;
+  border-radius: 20px; max-width: 340px;
+  width: 100%; text-align: center;
+}
+
+.confirm-content p { font-size: 15px; margin-bottom: 18px; line-height: 1.5; }
+.confirm-btns { display: flex; gap: 10px; }
+.confirm-yes { flex: 1; background: #1677FF; color: white; border: none; padding: 12px; border-radius: 11px; font-weight: 700; cursor: pointer; }
+.confirm-no { flex: 1; background: #f0f0f0; border: none; padding: 12px; border-radius: 11px; font-weight: 600; cursor: pointer; }
+
+/* ==================== FOOTER ==================== */
+.footer-bar {
+    background: #1a1a1a; color: white;
+  padding: 24px 15px 100px;
+  text-align: center;
+}
+
+.footer-bar .footer-contact-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: #25D366; color: white;
+  padding: 12px 20px; border-radius: 12px;
+  text-decoration: none; font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.footer-bar p { font-size: 13px; color: rgba(255,255,255,.6); }
+.footer-bar .footer-thanks { font-size: 15px; font-weight: 600; color: #FFD700; margin-top: 6px; }
+
+/* ==================== TOAST ==================== */
+.toast {
+  position: fixed; bottom: 90px; left: 50%;
+  transform: translateX(-50%);
+  background: #1a1a1a; color: white;
+  padding: 11px 18px; border-radius: 12px;
+  font-size: 14px; opacity: 0; pointer-events: none;
+  transition: .3s; z-index: 9999;
+  white-space: nowrap;
+}
+
+.toast.show { opacity: 1; bottom: 110px; }
+.toast.success { background: #52c41a; }
+.toast.error { background: #ff4d4f; }
+.toast.info { background: #1677FF; }
+
+/* ==================== TERMS PAGE ==================== */
+.terms-content {
+  background: white; padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 4px 14px rgba(0,0,0,.08);
+  line-height: 1.7; font-size: 14px;
+  max-height: 60vh; overflow-y: auto;
+  margin-bottom: 14px;
+}
+
+.terms-content h3 { font-size: 16px; margin: 14px 0 6px; color: #1677FF; }
+
+/* ==================== LOADING ==================== */
+.loading {
+  text-align: center; padding: 30px;
+  color: #888; font-size: 14px;
+}
+
+.loading::before {
+  content: '';
+  display: block;
+  width: 32px; height: 32px;
+  border: 3px solid #eee;
+  border-top-color: #1677FF;
+  border-radius: 50%;
+  animation: spin .8s linear infinite;
+  margin: 0 auto 10px;
+}
+
+/* ==================== ANIMATIONS ==================== */
+@keyframes slideUp {
+  from { transform: translateY(40px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ==================== MOBILE ==================== */
+@media(max-width:700px) {
+  .banner-box { height: 170px; }
+  .product-card img { height: 190px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ========== HEADER ========== -->
+<header>
+  <div class="header-top">
+    <div style="display:flex;align-items:center;gap:10px;" id="headerTitles">
+      <img src="data:image/jpeg;base64,/9j/4QEERXhpZgAATU0AKgAAAAgABgEAAAQAAAABAAAB4QEBAAQAAAABAAACIwEyAAIAAAAUAAAAVgESAAMAAAABAAEAAIdpAAQAAAABAAAAaoglAAQAAAABAAAAuwAAAAAyMDI2OjA1OjA5IDE0OjM3OjA1AAAEkggABAAAAAEAAAAAkAMAAgAAABQAAACgkpAAAgAAAAQxMzUAkBAAAgAAAAcAAAC0AAAAADIwMjY6MDQ6MTkgMjA6MjA6NDMAKzAxOjAwAAACAAcABQAAAAMAAADZAB0AAgAAAAsAAADxAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/+AAEEpGSUYAAQEAAAEAAQAA/+ICKElDQ19QUk9GSUxFAAEBAAACGAAAAAAEMAAAbW50clJHQiBYWVogAAAAAAAAAAAAAAAAYWNzcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAPbWAAEAAAAA0y0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJZGVzYwAAAPAAAAB0clhZWgAAAWQAAAAUZ1hZWgAAAXgAAAAUYlhZWgAAAYwAAAAUclRSQwAAAaAAAAAoZ1RSQwAAAaAAAAAoYlRSQwAAAaAAAAAod3RwdAAAAcgAAAAUY3BydAAAAdwAAAA8bWx1YwAAAAAAAAABAAAADGVuVVMAAABYAAAAHABzAFIARwBCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9wYXJhAAAAAAAEAAAAAmZmAADypwAADVkAABPQAAAKWwAAAAAAAAAAWFlaIAAAAAAAAPbWAAEAAAAA0y1tbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCADOAM4DASIAAhEBAxEB/8QAHAABAAICAwEAAAAAAAAAAAAAAAEIBgcCAwUE/8QASBAAAQMDAgMDCAYFCQkBAAAAAQACAwQFEQYHEiExE0FRFCJhcXKRobEIMjZSgcEWIyZCsjNEYnOCkqLR4RUXGCQ0Q1NUVZP/xAAaAQEAAwEBAQAAAAAAAAAAAAAAAQUGBAMC/8QALhEAAgEEAAMHAwUBAQAAAAAAAAECAwQFERIxMxMhQVFhcYEGFTQiIzJSoRSR/9oADAMBAAIRAxEAPwC1KFEKAhE71KAhERAEREAREQBERAEREAREQBERAEREAREQBERAEREBKFMqEAUhQgQEphEKAjKguXGRwC8O86ktlnYXV9VHGfuk8/cvqMXJ6itnxOpGmtyej38oStfO3WsDTgeUOH3ms5KXbrafx1qP7i9v+Wt/VnN9wtv7oz7iU5WuX7sWAH+cf/mvstm5unqyZsRqHQknAMrcD3qHa1ktuLJV/bt6U0Z3lF89PURVEYkhkbIxwyC05BX0N9S8GtczqTT5BMrrqJmwQPlkzwMBcceCwSbdHT8chaZJcj+gvSFKdT+C2eVWvTo/zloz8FStdt3XsGcAzn+wvuoty9O1LgDUmEnl+sGAvt2tZd7izyV/bt6U0ZqeSZXw0dypa+MSUc8crD3sOV9TTnvXi01zOqMlJbR2IiBQSEREAREQBERAEREBKE4CjOAsR3L1J+j1ge+JwFVMeziHhnqfwX3Tg6klGPNnlWqxowdSXJGN7nbhNtPaW+0ua+sxh8nUM9XpWjK2sqK6d81XM+WRxyXOOSorJHzzPklc5z3EkuJ6ldI5LWWtnChFJLvMHe39S6m233Hc12B1RxyuvKZXZor29kPHqQAgKcp3KNDZluhtbV2nKyON0j5qAnz4ic8I8QrJWmvgudBDV0jw+GVoIIVPj1yt1bC3qSRlXapXlzYwJI892TghUuUs48Pax5mkwmQkp9jPvTNtXBgfRTtx1YR8FUS5Dhr52+D3D4q305zE8eIKqVqWIwahuMXThqHjH9oryw0v1SR0fUMf0wkfAzkcrt4l0BcgVoDKb0elar5X2aqbNQ1D43DqM8j6wt77ea7p9RRimqQIa9g85vc/0hV1cMrtttZPbq2KppXlksZDgQfBcF3Ywrx2u5lnj8lUtpJb/T5FxAcp3rwNDX1moNP09Y0/rMcMg8HDqsg6rKzi4ScWbmlUVSKnHxCIi+T0CIiAIiIAhRCgOJOFoHe+6mo1HFSB3mU7OnpK37J9VVh3ScTri4g9zgPgFaYmClW2yjz03G30vExZ5yoCnl3phacxJCKSgQDuUKVCBA9FnuyVV2GtOzJwJYXN92CsDWU7Yu7LW1sdnGXlvvBXNeR4qMkd2OlwXEH6lmX82Y7sKsG4lP2Gs7mOnFKXe/mrQtaq77x03Y6yncBykY13wVHh5aqtGmz8d0FL1MCKlO9CtMYthcSFKnCgG29grq5tXWW5zvNe3tWg+PQrdwVb9mHlmuKcDoWPHwVkAcrK5SHDX2vE3ODqOdtp+BKIiri5CIiAIiIAiIgOL+irJukzGuLn7Q+QVnD0VZt0/tvc/bHyCtsP1n7FDn+gvcw9SoRaYxYKBQo71AOWVCnHLKgFTyGgeS9jSVX5JqO3Tfdmb814/VcqWTsayGQfuvDvivKpHig0e1CXBNP1LhxOBaHeK0dvtB2d9pZh+/Dj3FbntkvbUNPL1D42u+C1Rv8ARgRW2bvy5uVmcc+C4SNrlVx2mzTfeVKgKVqmYVhO5Cg6KQjOdnh+21L6GP8AkrHMVdNnBnWtN7D/AJKxbVl8t1/g2uB/H+Tmo71KKrLwIiIAiIgCIiAg9FWPdM/tzc/bH8IVnD0VYt0/tzc/bH8IVrh+syhz/QXuYmihSFp/ExZC9LTtkq7/AHSOhogDI8Zy7oB4rzwtpbD0wdqCtlIyWQAA+s/6Lmuqro0nNeB2WNBV68ab5M+O+7WXK2Wl9XFUxVLo28To2tIOPQtblpB5ghXGmYHxOYRyIIVVNXULaDUVwp2DDWTOAHgMrhxt7Ou3GfMssvjqdqlOnyZ4iAedyTHNS3OVbPkUkXp7LU6Hn8q0nbJSckwNBPqCwvfimMmnKebGTHMB7wQvc2eqe30XTNLgXRucz1c1z3dpBU6Kq3Y5xua/4rJQ/bu/k3VT96x+CtIUrk4ecVxIWtMHLmSg6KFPcjIRnezR/bel9h/yVjgFW3Zk/tzS+w/5KyQ6LMZbr/BtsB+N8kqFIRVZeBERAEREAREQEHoqxbo/bm6e2P4QrOu6KsO6P25untj5BWuH6zKHP9Be5ihRChK05iyQtwbCRHyi5Tgjh4Wt+ZWnTkBbo2AY/wAguUhB4TI0D3KuyctUGW+Fju5Rt17sMKq7r+obPqy5vZzBmIz445Kx2o65tustXVPIAjic74clVOrkfPUyyvOXPeXE+k81wYam9ymWv1BVSjGB0rk3qFxK5N7lfmU2bw2ErA+2V9MTzjeHgesf6LO9cxdvpK5sAzmFx+C1LsLVdnfq2mz/ACsIcPwP+q3Re4e3stbF96J4+BWVvY9ndfJuMdLtbHXoypMgw45XArsnHBK5p7jhdS1MO9IxNRakwiIpZ8GbbNfbql9h/wAlZRvRVt2b+3VL7D/krItPJZjLdc22A/HfuckQIqsvAiIgCIiAIiICD0VYt0R+3F1/rB8grOu6FVj3P+291/rB8grXEdVlD9QdBe5iRUKSgWnMWgRkLfmxFPwaUlf9+c/ILQrVY3ZqIRaHpjj673n4qpy71R0X2BW7jb8jy98bn5Hp2KjY7ElU8Aj+iOZ/JaE7lsXey5eWaq8lDsspWcOPAnmfyWuivbG0uzt15s5sxW7W4foRlSFxKkLvKozXaGsbS64ow4nErXRcvSP9FZGUdpC9p7wQqpaKqTRattcw7p2j38vzVrWnMXLwWby8dVlLzNlgZcVvKJUjUEJpr1WwkY4JnNx+JXw9yyHcaDyfW12ZjGZi73gH81j3cr+3lxU4v0Mtdx4a0l6kIiFexzGcbNfbml9h/wAlZFo5KtuzP26pPYf8lZNvRZfLdf4Ntgfx/klERVZeBERAEREAREQEO6KsG6Ds65uo/pj+EKz7+hVXt0Pt3dPbH8IVriOsyhz/AEF7mMKEzzTHVacxRPHwhWc2ui7PQtsGObmF3vJVX38xyVq9BRmHSFpYeRFMz5BUmZf7cV6ml+no7qSfoaC3TjfT65uYf+88PHqIWJra+/VmdHX0t1ibmN47KQjuPctUN5hWFjUVShFoqslSdO4kmO9SEQdV1HAfTbZOxuFNN/45Gv8Accq3NN+spY3j95oKqBF1VsdK1HlWm7bP9+njJ/uhUWaj/GRqfpyffOBoLeOl7DXNU7HKRjH+vlj8lhJ5LaW+9JwahpKjHKWDH4hx/wA1q53VWNhLioRZTZWHBcyRwUqFIXaV6M42bH7dUnsP+SsgOirls1g65pfYf8lY4LL5br/BtsB+P8koihVZeEoiIAiIgCnChT3IDi7oVWHdJo/Tq6e2P4QrPOWA6i2ytt8us9wmqqiOWYguDcY6YXdj7iFvU4plVlbSpdUlGnzK6DkpJyt5SbNWsHlX1WPwXEbN20n/AK+q9wV592t/Nmb+xXXl/po1rC5wA7zhW6scHk9poohy4IWN9wCwGm2etUUjHGtqncJBxy5rZkcYjja0dGjCqcldwuOFQ8C8w9hVtHJ1FzPH1NZae/WmooaoZZIOR+6e4qs2obFWaeuUlDXsIc0+Y/ukb3EFWxI8CvK1Fpu26hozT3OBsjf3XDk5nqPcvKxvnbS0++J0ZLGRvI7XdJFTJTjqoYQXYBW9qrZi0uOWXCsaO4HhPL3Lrh2XtnFk3Gs9zVdLLW/mzO/Yrpckv/TSbfN5qzW105n0LbHH6zWFh/AkfksXOzVs/wDo1nub/ks50rY4tO2iO3080ssbHOcHSYzzOVXZG9p3MEoPkWuIx9e1quVRdz9TXW/0WIrXPjoXs9+D+S0sXAq0mstMUuqaKKnrJJIxG7iDo8Z6LDG7NWouz5bVj3L0sb+lRpKE+Z45LE1ris500tGjHcuq5D6uVvY7M2o/z6r9wR2zVr4cCuqv8K7fu1v6lf8AYrry/wBMB2YcP05pef8A23/JWQC1/pTbig05d2V9PV1EkjGloa/GOaz9mFSZCvCvV4ocjSYq1na0eCpzOQCKVxPVcJaEoiIAiIgC4yvbGxz3uDWtGSScADxXPuXha1P7K3f0Ukp/wFAfbb7lR3FhfQ1UNSwciYnhwHrwvv6BUm2K1tNpTWDPK3udbKw9jNk8gfH8MhW61bqSj05piqu9Q9piiZxMGf5Rx+qB61OgehUXShirmUUlXTtq3/VhMgDz6h1X1tIyOapDoi/V193rtNyrnuMlRWdpz8OfT0AclYXfPcCfSFjhprW4C7V2WxuxkxNHV2PHw9KEmxbvqix2eQMul1o6WT7skoB9y7bVf7TeGOdarhS1eOvYyBxC0RozY3/btsZddY19Y6sqx2vZNf5wB5+cTnmvB3E2vuW27RqPSFzqXQQOBlY44fGPHl1HrUEaLROeGtJcQABnJ5LzW6osWDm824Y8aln+axDQ2rm6z23fc3gNqWwyRVDR3SBvMj0Hr+Krjsztxb9eyXaS511TTtppGta2HHPOTk5CElxaa726ucGUVfS1D/CKZrj8CvtjVQd0NAnayW03jTl4qnufNwgPOHNI593UejCsHqHWwsG3X6Q1LAZ3UzHMjdy4pXDkPf8Amg0ZfdrxbrRD2t1rqajjPR08gZn1Z6rzbVqywXafsbZeaCqm+5FO1zvdlV70Rt7d91e11Jq641EdNM49kGjznjP7ueTWjp0K+nWH0em0NBLcNJXWrFdTjtGxSkZdjn5rhggqCCy4Ix3FeXNqSyUlTJT1N2oIZ2HDo3ztDh+GVqz6Om4NXqqzVNpvbnPu9sw10jvrSs6An0g8j+C1hUaXg1lv7fbTVTSQ05mkeXMPMYaOSknRailv1pq3hlLc6OZ56Njma4+7K9AOyqv692Uj03Yqq72K51TpqVvalj8A8I5nBHeti7Ia0lum2L7hepeJ1tL45Zj1c1oyD68YQaNp11VT0MDp6yeKCFvNz5HBoH4leLSa003VTiGnvttklJwGtqG8z71XSngv++eq6t8tXJSafpXEAN+q0dwA73YWV3f6OFrdbHi1XSqhrmjLXykFpd3ZxggJsaLCMeHNDmnIIzkJnmq4bF62vVm1bUaE1W975Y3OZA+Q5LXD93PeCOYVjgOSEHJECIAiIgHcvB1ucaUvBH/qS/wFe8V4usYnS6UvMcbS57qOVoAGSSWHCAqrtVopur9vb4yBoNfBUiSneBnzuH6vqK6LfWan17XWnRdU5/Z0UnDLyOWtHIl/sjI9y2r9FC21du0zeGVtNNA91WCO0YWkjhA71t626atFsvNfdaGiihr67HbzNHN+Pkp2CtN+tNNY9/tOW6ijbHBTMhjaAMZ5Hmvq+kNxU+5enJqsf8sGRnn05Sc16G4dBWO+kpZKmOlndT8UH60MJbyHPn0Wy95dvma708I6ZzY7rSkvppD0J+6fQUJ2bFgc18LHx4LC0FuOmFim6s1PBoK/Pqy0ReRyA8Xf5vL44WjdN7sar2/p22PV1gqavyYdnFKTwuDR3cWCHDwXn6nv2td6amC0Wi0zWyyl4dM9+eE+l7iBnHcAoIMk+jQyb/dtqgnPZmR4Z4Z7Ln+S1Ps9Y9X3iruJ0dXtpGxOHbHti0c+meqtrpzStLpDb11moG8Yjpn8b8c5JC05cfWVU3afXN823nurGaaqa5tVIM8TXs4eHPo9KDZ7m4GmtZafrLbeteyG9WuGZrSzygubz5459M4Wbb9XNl92nstytfH5C+eOTGMcI4SAD6isY1lq/Wm7dDTWS36TqKOldK2Rz+FxDnDplzgAAM5W8qDbylO19PpS5EPxTCN7x3SdS4eooTs9XaaWnm210/5IW9mKNjSG9zgPOHvysq4WtY5zsBoHM55Kq1gu+uNl62ot9xts1zsXGXMLMlvoc1wzw58Cvt1Pu7q7X9DJY9F6bq6R1UOylnzxODTyPPADfWgOn6P7m1G9+q5rdzoCJ3Zb0wZRw/JY1d9SXDS+/eoKy10Lq2pFRI0QgE5BA8FvvYfbn9AdOS+XOZLeK0h9TI3mGjuYD3gfmte6HttV/wAT1+qZaaUU2ZT2hYeHm0Y54wiBjGq92NV6pDtOMtsdunq8ROYQQ855Y87otkR6Ln0l9H+82wO46x9M+eZzM9SQTjxwAu76R2g5rza4L/Y4iLtbzxO7IYc+Pryx3jGR+KyfZzUztZaH7K600jayBvk9U2RhAkyPrc/EdUGzF/ooz0ztA1UUZYahlY7tAOpyBjP4Ldvd0VUbvp/WGzWsqu7aVp31+nal5c6FoLmhufquA5jHivcqvpBXy50BpbFpWYXN44WuyZA0nv4cD4oQeXrV8dR9Ku1R27DnskgExb94Ak5/DCtM0YaPUtB7C7ZXW3Xqq1drPJvNTl0UTzlzOI5Lnek+C37jkgIClQFKAKQoUhAFw71yccDKxeLVtHLUdm2GoB4w3JDepOPFAZMGhv1QFzXBh656DkuZOAT4IDokia54cQC4dDhc2DBXF5OT4Bchy5+CEHCelgnx20MchHTjaCuDIWR8o2NaO7AAX05znxXSXA5KEnaPq8vBfKKeIOz2bPcvpYeoUHxHpQg5NaGt80AeoLhjkVzz3LhnqfBCTj2LJARI1rh4EZUx0sELcQxRxjwY0D5KIJmvklY0HLCAc+kZXcSMkIDr4eEetcIomCQv4W8R6nAXa/v9C6wcEZ7zhAc5G5GFxhijjBEbGszzOBjK7CeS4DqgOt8TZCeJocOnMZSKlghdxRQxMd4taAV3j1c1wc7n60IDG4K7DyXTJMIYJJXAlsbS4gdeSmCZtRBHKwENe0OAPXmhJ2hFAUoD/9k=" style="width:44px;height:44px;border-radius:10px;object-fit:contain;background:white;padding:3px;" alt="Moboro">
+      <div>
+      <h1>Marché Moboro</h1>
+      <p>Le plus grand marché local-digital à proximité de chez vous!</p>
+    </div>
+      </div>
+</header>
+
+<!-- ========== SEARCH ========== -->
+<div class="search-box">
+  <input type="text" id="searchInput" placeholder="Rechercher produit, vendeur, quartier..."
+    oninput="handleSearch()">
+</div>
+
+<!-- ========== HOME PAGE ========== -->
+<div class="page" id="homePage">
+
+  <!-- BANNER -->
+  <div class="banner">
+    <div class="banner-box">
+      <img id="bannerImg" src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1200" loading="lazy">
+      <div class="banner-text">
+        <h2 id="bannerTitle">Bienvenue sur Marché Moboro</h2>
+        <p id="bannerSubtitle">Achetez facilement auprès des vendeurs de qualité</p>
+      </div>
+      <div class="banner-dots" id="bannerDots"></div>
+    </div>
+  </div>
+  
+<!-- CATÉGORIE A -->
+
+  <div class="section-label">⭐ Importateurs & Grossistes</div>
+  <div class="categories">
+    <button class="cat-btn big-btn" onclick="openCategory('ig','A')">Meilleur Importateurs & Grossistes de Brazzaville</button>
+    <div style="grid-column:1/3;padding:8px 0 4px;font-size:11px;font-weight:700;color:#888;border-left:3px solid #1677FF;padding-left:8px;">🔷 MULTI-SERVICES</div>
+    <button class="cat-btn" onclick="openCategory('immo','A')">🏠 Immobilier</button>
+    <button class="cat-btn" onclick="openCategory('coiffure','A')">✂️ Grand Salon de Coiffure</button>
+    <button class="cat-btn" onclick="openCategory('hotel','A')">🏨 Hôtel, Jardin & Tourisme</button>
+    <button class="cat-btn" onclick="openCategory('deco-mariage','A')">💍 Décoration Mariage</button>
+    <button class="cat-btn" onclick="openCategory('menage','A')">🧹 Service de Ménage</button>
+    <button class="cat-btn" onclick="openCategory('demenagement','A')">🚛 Service de Déménagement</button>
+    <button class="cat-btn" onclick="openCategory('auto','A')">🚗 Automobile & Dépannage</button>
+    <button class="cat-btn" onclick="openCategory('couture','A')">🧵 Couture & Styliste</button>
+    <button class="cat-btn" onclick="openCategory('pharmacie','A')">💊 Pharmacie</button>
+    <button class="cat-btn" onclick="openCategory('priseningue','A')">🏥 Prinsingue</button>
+    <button class="cat-btn" onclick="openCategory('librairie','A')">📚 Librairie & Papeterie</button>
+    <button class="cat-btn" onclick="openCategory('construction','A')">🏗️ Matériaux de Construction</button>
+    <button class="cat-btn" onclick="openCategory('photoShop','A')">📸 Photo Shop</button>
+    <button class="cat-btn" onclick="openCategory('alimentation','A')">🛒 Alimentation</button>
+  </div>
+
+  <!-- CATÉGORIE B -->
+  <div class="section-label">🛍️ Boutiques & Vendeurs</div>
+  <div class="categories">
+    <button class="cat-btn" onclick="openCategory('c1','B')">👟 Chaussures & Basket</button>
+    <button class="cat-btn" onclick="openCategory('c2','B')">📱 Accessoires Téléphone</button>
+    <button class="cat-btn" onclick="openCategory('c3','B')">💄 Beauté & Cosmétiques</button>
+    <button class="cat-btn" onclick="openCategory('c4','B')">👗 Vêtements Femme</button>
+    <button class="cat-btn" onclick="openCategory('c5','B')">👠 Chaussures Femme</button>
+    <button class="cat-btn" onclick="openCategory('c6','B')">👜 Sacs & Accessoires Mode</button>
+    <button class="cat-btn" onclick="openCategory('c7','B')">🏠 Maison & Décoration</button>
+    <button class="cat-btn" onclick="openCategory('c8','B')">🧼 Savon Artisanal</button>
+    <button class="cat-btn" onclick="openCategory('c9','B')">🌸 Parfums & Soins Luxe</button>
+    <button class="cat-btn" onclick="openCategory('c10','B')">👶 Bébé & Enfants</button>
+    <button class="cat-btn" onclick="openCategory('c11','B')">💇 Perruques & Mèches</button>
+    <button class="cat-btn" onclick="openCategory('c12','B')">🩱 Lingerie & Rideau</button>
+    <button class="cat-btn" onclick="openCategory('c13','B')">💊 Santé & Bien-être</button>
+    <button class="cat-btn" onclick="openCategory('c14','B')">👔 Friperie & Habit de Travail</button>
+    <button class="cat-btn" onclick="openCategory('c15','B')">🧵 Tissus & Pagnes</button>
+    <button class="cat-btn" onclick="openCategory('c16','B')">🚢 Occasion d'Europe</button>
+    <button class="cat-btn" onclick="openCategory('c17','B')">🎂 Pâtisserie</button>
+    <button class="cat-btn" onclick="openCategory('c18','B')">🕴️ Veste & Chaussures Luxe</button>
+    <button class="cat-btn" onclick="openCategory('c19','B')">🧴 Plastique</button>
+    <button class="cat-btn" onclick="openCategory('c20','B')">📺 Électronique</button>
+    <button class="cat-btn" onclick="openCategory('c21','B')">🥚 Grossiste Œufs</button>
+    <button class="cat-btn" onclick="openCategory('c22','B')">🎉 Anniversaire & Objet Jetable</button>
+  </div>
+
+  <!-- PROMOS -->
+  <div class="section-label">🔥 Promotions & Liquidations</div>
+  <div class="categories">
+    <button class="cat-btn big-btn promo-btn" onclick="loadPromos('A')">🔥 Promos Catégorie A</button>
+    <button class="cat-btn big-btn promo-btn" onclick="loadPromos('B')">💥 Promos Catégorie B</button>
+  </div>
+
+  <!-- VENDEUR -->
+  <div class="section-label">🏪 Espace Vendeur</div>
+  <div class="categories">
+    <button class="cat-btn register-cat-btn" onclick="openRegister()">✅ Devenir vendeur</button>
+    <button class="cat-btn login-cat-btn" onclick="openSellerLogin()">🔑 Se connecter</button>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer-bar">
+    <a href="https://wa.me/242050672009" target="_blank" class="footer-contact-btn">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Nous contacter
+    </a>
+    <p class="footer-thanks">Merci d'avoir choisi Marché Moboro</p>
+    <p>Votre grand marché à la maison</p>
+  </div>
+</div>
+
+<!-- ========== SEARCH RESULTS PAGE ========== -->
+<div class="page" id="searchResultsPage">
+  <div class="sellers-page">
+    <div class="page-header">
+    <button class="back-btn" onclick="goBack()">←</button>
+      <div><div class="section-title" id="searchResultsTitle">Résultats</div></div>
+    </div>
+    <div id="searchResults"></div>
+  </div>
+</div>
+
+<!-- ========== SELLERS PAGE ========== -->
+<div class="page" id="sellersPage">
+  <div class="sellers-page">
+    <div class="page-header">
+      <button class="back-btn" onclick="goHome()">←</button>
+      <div>
+        <div class="section-title" id="categoryTitle">Vendeurs</div>
+      </div>
+    </div>
+    <div id="sellerList"></div>
+  </div>
+</div>
+
+<!-- ========== PRODUCTS PAGE ========== -->
+<div class="page" id="productsPage">
+  <div class="products-page">
+    <div class="page-header">
+      <button class="back-btn" onclick="backToSellers()">←</button>
+      <div>
+        <div class="section-title" id="sellerNameTitle">Produits</div>
+        <div class="section-subtitle" id="sellerNameSubtitle"></div>
+      </div>
+    </div>
+    <div id="productsList"></div>
+  </div>
+</div>
+
+<!-- ========== PROMOS PAGE ========== -->
+<div class="page" id="promosPage">
+  <div class="products-page">
+    <div class="page-header">
+<button class="back-btn" onclick="goBack()">←</button>
+      <div><div class="section-title" id="promosTitle">Promotions</div></div>
+    </div>
+    <div id="promosList"></div>
+  </div>
+</div>
+
+<!-- ========== TERMS PAGE ========== -->
+<div class="page" id="termsPage">
+  <div class="register-page">
+    <div class="page-header">
+      <button class="back-btn" onclick="goHome()">←</button>
+      <div><div class="section-title">Conditions d'utilisation</div></div>
+    </div>
+    <div class="form-card">
+      <div class="info-box">
+        <strong>Bienvenue. Lancez votre activité en toute confiance et en toute sécurité</strong><br><br>
+        Créez votre espace vendeur gratuitement et gardez 100% de vos ventes.<br>
+        Nous ne prenons <strong>aucune commission</strong> sur vos transactions.
+      </div>
+      <div class="terms-content">
+        <h3>📋 Conditions du Marché Moboro</h3>
+        <p>En vous inscrivant sur Marché Moboro, vous acceptez les conditions suivantes :</p>
+        <h3>1. Inscription gratuite</h3>
+        <p>L'inscription est 100% gratuite. Aucun frais ne vous sera demandé lors de la création de votre compte.</p>
+        <h3>2. Frais d'abonnement</h3>
+        <p>Après la période promotionnelle, des frais de <strong>500 FCFA/semaine</strong> ou <strong>1 500 FCFA/mois</strong> s'appliquent pour maintenir votre espace actif. Vous serez informé avant tout prélèvement.</p>
+        <h3>3. Sans engagement</h3>
+        <p>Vous pouvez arrêter votre abonnement à tout moment sans pénalité.</p>
+        <h3>4. Publications</h3>
+        <p>Vous vous engagez à publier uniquement des produits légaux et conformes aux lois congolaises. Toute publication frauduleuse entraînera la suspension du compte.</p>
+        <h3>5. Commission</h3>
+        <p>Marché Moboro ne prend <strong>aucune commission</strong> sur vos ventes. Vous gardez <strong>100%</strong> de vos revenus.</p>
+        <h3>6. Support</h3>
+        <p>Notre équipe reste disponible sur WhatsApp pour vous accompagner.</p>
+        <h3>Pourquoi commencer maintenant :</h3>
+        <p>✅ Inscription gratuite : sans frais cachés<br>
+        ✅ Support dédié : nous sommes disponibles si besoin d'aide<br>
+        ✅ Sans engagement : les frais ne s'appliquent qu'après la période promotionnelle</p>
+      </div>
+      <button class="primary-btn" onclick="acceptTerms()">✅ Accepter et s'inscrire gratuitement</button>
+      <button class="secondary-btn" onclick="goHome()">✕ Refuser</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== REGISTER PAGE ========== -->
+<div class="page" id="registerPage">
+  <div class="register-page">
+    <div class="page-header">
+      <button class="back-btn" onclick="showPage('termsPage')">←</button>
+      <div><div class="section-title">Créer mon compte</div></div>
+    </div>
+    <div class="form-card">
+      <h2>Informations du vendeur</h2>
+      <input type="text" id="regFullName" placeholder="Nom complet *">
+      <input type="tel" id="regPhone" placeholder="Téléphone *">
+      <input type="text" id="regQuartier" placeholder="Quartier *">
+      <input type="text" id="regAddress" placeholder="Adresse *">
+      <input type="text" id="regVille" placeholder="Ville * (ex: Brazzaville)">
+      <select id="regCategory">
+        <option value="">Choisir votre catégorie *</option>
+        <optgroup label="Catégorie A - Importateurs & Grossistes">
+          <option value="ig">Meilleur Importateurs & Grossistes</option>
+          <option value="immo">Immobilier</option>
+          <option value="coiffure">Grand Salon de Coiffure</option>
+          <option value="hotel">Hôtel, Jardin & Lieu Touristique</option>
+          <option value="deco-mariage">Décoration Mariage & Autres</option>
+          <option value="menage">Service de Ménage</option>
+          <option value="demenagement">Service de Déménagement</option>
+          <option value="auto">Automobile & Dépannage</option>
+          <option value="couture">Couture & Styliste</option>
+        </optgroup>
+        <optgroup label="Catégorie B - Boutiques & Vendeurs">
+          <option value="c1">Chaussures & Basket</option>
+          <option value="c2">Accessoires Téléphone</option>
+          <option value="c3">Beauté & Cosmétiques</option>
+          <option value="c4">Vêtements Femme</option>
+          <option value="c5">Chaussures Femme</option>
+          <option value="c6">Sacs & Accessoires Mode</option>
+          <option value="c7">Maison & Décoration</option>
+          <option value="c8">Savon Artisanal & Naturel</option>
+          <option value="c9">Parfums & Soins Luxe</option>
+          <option value="c10">Bébé & Enfants</option>
+          <option value="c11">Perruques & Mèches</option>
+          <option value="c12">Lingerie, Nuit, Rideau & Té</option>
+          <option value="c13">Santé & Bien-être Femme</option>
+          <option value="c14">Friperie & Habit de Travail</option>
+          <option value="c15">Tissus & Pagnes</option>
+          <option value="c16">Occasion d'Europe</option>
+          <option value="c17">Pâtisserie</option>
+          <option value="c18">Veste & Chaussures de Luxe</option>
+          <option value="c19">Plastique</option>
+          <option value="c20">Électronique</option>
+          <option value="c21">Grossiste Œufs</option>
+          <option value="c22">Anniversaire & Objet Jetable</option>
+        </optgroup>
+      </select>
+      <textarea id="regDescription" placeholder="Description de votre activité *"></textarea>
+      <input type="file" id="regPhotoFile" accept="image/*"
+        style="width:100%;padding:10px;border-radius:12px;border:1.5px solid #e8e8e8;margin-bottom:10px;">
+      <img id="regPhotoPreview"
+        style="display:none;width:100%;border-radius:12px;margin-bottom:10px;object-fit:cover;max-height:200px;">
+      <button class="primary-btn" onclick="registerSeller()">Continuer →</button>
+      <button class="secondary-btn" onclick="goHome()">Annuler</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== PIN PAGE ========== -->
+<div class="page" id="pinPage">
+  <div class="register-page">
+    <div class="page-header">
+      <button class="back-btn" onclick="showPage('registerPage')">←</button>
+      <div><div class="section-title">Créer votre PIN</div></div>
+    </div>
+    <div class="form-card">
+      <div class="info-box">Votre PIN vous permettra de vous connecter à votre compte. Choisissez-en un facile à retenir mais difficile à deviner.</div>
+      <input type="password" id="pinInput" placeholder="Votre PIN (minimum 4 chiffres)" maxlength="6" inputmode="numeric">
+      <input type="password" id="pinConfirmInput" placeholder="Confirmer votre PIN" maxlength="6" inputmode="numeric">
+      <button class="primary-btn" onclick="validatePin()">✅ Valider et créer mon compte</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== REGISTER SUCCESS PAGE ========== -->
+<div class="page" id="registerSuccessPage">
+  <div class="register-page">
+    <div class="form-card">
+      <div class="success-box">
+        <strong>🎉 Compte créé avec succès !</strong><br><br>
+        Bienvenue, <strong id="notifName"></strong> !<br><br>
+        Votre inscription est 100% gratuite.<br>
+        Rendez-vous sur l'accueil pour vous connecter et commencer à vendre partout au Congo.
+      </div>
+      <div class="code-box">
+        Votre code vendeur :<br>
+        <span id="notifCode" style="font-size:24px;letter-spacing:3px;"></span>
+      </div>
+      <div class="info-box">
+        💡 <strong>Conseil :</strong> Publiez 3 produits ou plus par jour pour augmenter votre visibilité et monter en position.<br><br>
+        📌 <strong>À noter :</strong> Après la période promotionnelle, les frais sont de 500 FCFA/semaine ou 1 500 FCFA/mois.<br><br>
+        Notre équipe reste disponible si vous avez besoin d'aide.<br><br>
+      </div>
+      <button class="primary-btn" onclick="goHome()">Retour à l'accueil et se connecter</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== LOGIN PAGE ========== -->
+<div class="page" id="loginPage">
+  <div class="register-page">
+    <div class="page-header">
+      <button class="back-btn" onclick="goHome()">←</button>
+      <div><div class="section-title">Connexion vendeur</div></div>
+    </div>
+    <div class="form-card">
+      <input type="text" id="loginCode" placeholder="Code vendeur (ex: MBR0001A)" style="text-transform:uppercase;">
+     <input type="password" id="loginPin" placeholder="Code PIN" maxlength="12" inputmode="numeric">
+      <button class="primary-btn" onclick="sellerLogin()">Se connecter</button>
+      <button class="secondary-btn" onclick="openRegister()">Créer un compte</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== DASHBOARD PAGE ========== -->
+<div class="page" id="dashboardPage">
+  <div class="register-page">
+        <div class="page-header">
+      <button class="back-btn" onclick="goHome()">←</button>
+      <div><div class="section-title">Mon espace</div></div>
+    </div>
+
+    <div class="seller-profile-header">
+      <img class="seller-avatar" id="dashPhoto" src="https://images.unsplash.com/photo-1556740749-887f6717d7e4?q=80&w=200" alt="Photo">
+      <div>
+        <div style="font-size:17px;font-weight:700;" id="dashSellerName">Nom vendeur</div>
+        <div style="font-size:13px;color:#1677FF;font-weight:600;" id="dashSellerCode">Code</div>
+        <div style="font-size:12px;color:#888;" id="dashSellerCategory">Catégorie</div>
+      </div>
+    </div>
+
+    <div class="dash-grid">
+      <button class="dash-btn blue" onclick="showPage('publishPage')">
+        <span class="icon">📤</span>Publier un produit
+      </button>
+      <button class="dash-btn green" onclick="viewMyProducts()">
+        <span class="icon">📦</span>Mes publications
+      </button>
+      <button class="dash-btn orange" onclick="openSendToPromo()">
+        <span class="icon">🔥</span>Envoyer en promo
+      </button>
+      <button class="dash-btn" onclick="viewMyPromos()">
+        <span class="icon">💥</span>Mes promos
+      </button>
+      <button class="dash-btn full" onclick="openProfile()">
+        <span class="icon">👤</span>Mon profil & informations
+      </button>
+      <button class="dash-btn full danger-btn" onclick="logoutSeller()">
+        Se déconnecter
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== PROFILE PAGE ========== -->
+<div class="page" id="profilePage">
+  <div class="register-page">
+    <div class="page-header">
+      <button class="back-btn" onclick="showPage('dashboardPage')">←</button>
+      <div><div class="section-title">Mon profil</div></div>
+    </div>
+    <div class="form-card">
+      <div style="text-align:center;margin-bottom:16px;">
+        <img id="profilePhoto" src="https://images.unsplash.com/photo-1556740749-887f6717d7e4?q=80&w=200"
+          style="width:90px;height:90px;border-radius:50%;object-fit:cover;border:3px solid #1677FF;">
+        <br>
+        <div style="display:flex;gap:8px;justify-content:center;margin-top:10px;">
+          <label for="profilePhotoGallery" style="display:inline-flex;align-items:center;gap:5px;background:#f0f7ff;border:2px dashed #1677FF;padding:8px 12px;border-radius:12px;cursor:pointer;font-weight:600;color:#1677FF;font-size:12px;">
+            🖼️ Galerie
+          </label>
+          <input type="file" id="profilePhotoGallery" accept="image/*" style="display:none;" onchange="previewProfilePhoto(this)">
+          <label for="profilePhotoCamera" style="display:inline-flex;align-items:center;gap:5px;background:#f0fff4;border:2px dashed #52c41a;padding:8px 12px;border-radius:12px;cursor:pointer;font-weight:600;color:#52c41a;font-size:12px;">
+            📷 Caméra
+          </label>
+          <input type="file" id="profilePhotoCamera" accept="image/*" capture="user" style="display:none;" onchange="previewProfilePhoto(this)">
+        </div>
+      </div>
+      <div class="code-box" id="profileCode" style="font-size:18px;"></div>
+      <div class="info-box" style="background:#f9f9f9;">
+        <strong>Nom :</strong> <span id="profileName"></span><br>
+        <strong>Téléphone :</strong> <span id="profilePhone"></span><br>
+        <strong>Quartier :</strong> <span id="profileQuartier"></span><br>
+        <strong>Ville :</strong> <span id="profileVille"></span><br>
+        <strong>Catégorie :</strong> <span id="profileCategory"></span><br>
+        <strong>Description :</strong> <span id="profileDescription"></span>
+      </div>
+      <button class="primary-btn" onclick="openEditProfile()">✏️ Modifier mon profil</button>
+      <a href="https://wa.me/242050672009" target="_blank" class="green-btn">Contacter l'agence</a>
+    </div>
+  </div>
+</div>
+
+<!-- ========== EDIT PROFILE PAGE ========== -->
+<div class="page" id="editProfilePage">
+  <div class="register-page">
+    <div class="page-header">
+      <button class="back-btn" onclick="showPage('profilePage')">←</button>
+      <div><div class="section-title">Modifier mon profil</div></div>
+    </div>
+    <div class="form-card">
+      <input type="text" id="editFullName" placeholder="Nom complet *">
+      <input type="tel" id="editPhone" placeholder="Téléphone *">
+      <input type="text" id="editQuartier" placeholder="Quartier *">
+      <input type="text" id="editAddress" placeholder="Adresse *">
+      <input type="text" id="editVille" placeholder="Ville *">
+      <textarea id="editDescription" placeholder="Description de votre activité *"></textarea>
+      <button class="primary-btn" onclick="saveEditProfile()">💾 Enregistrer les modifications</button>
+      <button class="secondary-btn" onclick="showPage('profilePage')">Annuler</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== PUBLISH PAGE ========== -->
+<div class="page" id="publishPage">
+  <div class="register-page">
+    <div class="page-header">
+      <button class="back-btn" onclick="showPage('dashboardPage')">←</button>
+      <div><div class="section-title">Publier un produit</div></div>
+    </div>
+    <div class="form-card">
+      <input type="text" id="pubName" placeholder="Nom du produit *">
+      <input type="number" id="pubPrice" placeholder="Prix (FCFA) *" min="0">
+      <textarea id="pubDescription" placeholder="Description du produit"></textarea>
+
+      <!-- Zone photos style Facebook -->
+      <div style="margin-bottom:12px;">
+        <label style="font-size:13px;color:#555;font-weight:600;display:block;margin-bottom:8px;">📸 Photos (max 3) *</label>
+
+        <!-- Preview photos -->
+        <div id="pubPhotosPreview" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:10px;"></div>
+
+        <!-- Boutons ajout photos -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;" id="pubPhotoButtons">
+          <label for="pubGallery" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;background:#f0f7ff;border:2px dashed #1677FF;padding:14px;border-radius:14px;cursor:pointer;color:#1677FF;font-weight:600;font-size:13px;">
+            🖼️ Galerie
+          </label>
+          <input type="file" id="pubGallery" accept="image/*" multiple style="display:none;" onchange="addPubPhotos(this, 'gallery')">
+
+          <label for="pubCamera" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;background:#f0fff4;border:2px dashed #52c41a;padding:14px;border-radius:14px;cursor:pointer;color:#52c41a;font-weight:600;font-size:13px;">
+            📷 Caméra
+          </label>
+          <input type="file" id="pubCamera" accept="image/*" capture="environment" style="display:none;" onchange="addPubPhotos(this, 'camera')">
+        </div>
+
+      <p id="pubPhotoCount" style="font-size:12px;color:#888;margin-top:6px;text-align:center;">0/3 photos</p>
+      </div>
+
+      <button class="primary-btn" onclick="publishProduct()">📤 Publier</button>
+      <button class="secondary-btn" onclick="showPage('dashboardPage')">Annuler</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ========== MY PRODUCTS PAGE ========== -->
+<div class="page" id="myProductsPage">
+  <div class="register-page">
+    <div class="page-header">
+      <button class="back-btn" onclick="showPage('dashboardPage')">←</button>
+      <div><div class="section-title">Mes publications</div></div>
+    </div>
+    <div id="myProductsList"></div>
+  </div>
+</div>
+
+<!-- ========== SEND TO PROMO PAGE ========== -->
+<div class="page" id="sendToPromoPage">
+  <div class="register-page">
+    <div class="page-header">
+      <button class="back-btn" onclick="showPage('dashboardPage')">←</button>
+      <div><div class="section-title">Envoyer en promo</div></div>
+    </div>
+    <div id="promoSelectList"></div>
+  </div>
+</div>
+
+<!-- ========== MY PROMOS PAGE ========== -->
+<div class="page" id="myPromosPage">
+  <div class="register-page">
+    <div class="page-header">
+      <button class="back-btn" onclick="showPage('dashboardPage')">←</button>
+      <div><div class="section-title">Mes promotions</div></div>
+    </div>
+    <div id="myPromosList"></div>
+  </div>
+</div>
+
+<!-- ========== ADMIN LOGIN PAGE ========== -->
+<div class="page" id="adminLoginPage">
+  <div class="register-page">
+    <div class="page-header">
+      <button class="back-btn" onclick="goHome()">←</button>
+      <div><div class="section-title">Administration</div></div>
+    </div>
+    <div class="form-card">
+      <input type="text" id="adminCode" placeholder="Code administrateur">
+      <input type="password" id="adminPin" placeholder="Mot de passe admin">
+      <button class="primary-btn" onclick="adminLogin()">Connexion admin</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== ADMIN DASHBOARD ========== -->
+<div class="page" id="adminDashboard">
+  <div class="admin-page">
+    <div class="page-header">
+      <button class="back-btn" onclick="goHome()">←</button>
+      <div><div class="section-title">Tableau de bord Admin</div></div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-number" id="statTotalSellers">-</div>
+        <div class="stat-label">Vendeurs total</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" id="statTodaySellers">-</div>
+        <div class="stat-label">Inscrits aujourd'hui</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" id="statTodayVisits">-</div>
+        <div class="stat-label">Visites aujourd'hui</div>
+              </div>
+      <div class="stat-card">
+        <div class="stat-number" id="statTotalVisits">-</div>
+        <div class="stat-label">Visites total</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" id="statTodayOrders">-</div>
+        <div class="stat-label">Commandes aujourd'hui</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" id="statTotalOrders">-</div>
+        <div class="stat-label">Commandes total</div>
+      </div>
+    </div>
+
+    <!-- Supprimer compte -->
+    <div class="form-card" style="margin-bottom:14px;">
+      <h2>🗑️ Supprimer un compte</h2>
+      <input type="text" id="deleteSellerCode" placeholder="Code vendeur (ex: MBR0001A)" style="text-transform:uppercase;">
+      <button class="danger-btn" onclick="deleteSellerAccount()">Supprimer définitivement</button>
+    </div>
+
+    <!-- Filtres vendeurs -->
+    <div class="form-card" style="margin-bottom:14px;">
+      <h2>Liste des vendeurs</h2>
+      <input type="text" id="filterVille" placeholder="Filtrer par ville">
+      <input type="text" id="filterQuartier" placeholder="Filtrer par quartier">
+      <button class="primary-btn" onclick="loadSellersList()">Rechercher</button>
+    </div>
+
+    <div style="overflow-x:auto;">
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>Code</th>
+            <th>Vendeur</th>
+            <th>Catégorie</th>
+            <th>Dynamisme</th>
+            <th>Abonnement</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="sellersTableBody">
+          <tr><td colspan="6" style="text-align:center;padding:20px;color:#888;">Cliquez sur "Rechercher"</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Positions -->
+    <div class="form-card" style="margin-top:16px;">
+      <h2>Positions par catégorie</h2>
+      <select id="positionCat" onchange="loadPositions(this.value)">
+        <option value="">Choisir catégorie</option>
+        <option value="ig">Importateurs & Grossistes</option>
+        <option value="c1">Chaussures & Basket</option>
+        <option value="c2">Accessoires Téléphone</option>
+        <option value="c3">Beauté & Cosmétiques</option>
+        <option value="c4">Vêtements Femme</option>
+      </select>
+      <div id="positionsList"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== CART BAR ========== -->
+<div class="cart-bar" id="cartBar">
+  <div class="cart-left">
+    <div class="cart-circle">
+      🛒
+      <div class="cart-count" id="cartCount">0</div>
+    </div>
+    <div class="cart-preview">
+      <strong>Panier</strong>
+      <span id="cartTotalPreview">0 FCFA</span>
+    </div>
+  </div>
+  <button class="pay-btn" onclick="openCart()">Commander</button>
+</div>
+
+<!-- ========== CART MODAL ========== -->
+<div class="modal" id="cartModal">
+  <div class="modal-content">
+    <h2>🛒 Votre commande</h2>
+    <div class="notice">Votre commande sera envoyée directement au vendeur sur WhatsApp.</div>
+    <div id="cartItems"></div>
+    <div class="total"><span id="totalPrice">0</span> FCFA</div>
+    <input type="text" id="clientName" placeholder="Nom complet *">
+    <input type="tel" id="clientPhone" placeholder="Téléphone *">
+    <input type="text" id="clientQuartier" placeholder="Quartier *">
+    <input type="text" id="clientAddress" placeholder="Adresse *">
+    <button class="command-btn" onclick="confirmOrder()">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Commander maintenant
+    </button>
+    <button class="close-modal-btn" onclick="closeCart()">Fermer</button>
+  </div>
+</div>
+
+<!-- ========== CONFIRM DIALOG ========== -->
+<div class="confirm-dialog" id="confirmDialog">
+  <div class="confirm-content">
+    <p id="confirmMessage"></p>
+    <div class="confirm-btns">
+      <button class="confirm-yes" id="confirmYes">Oui</button>
+      <button class="confirm-no" id="confirmNo">Non</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== MODAL COMPTE BLOQUÉ ========== -->
+<div class="modal" id="blockedModal" style="display:none;">
+  <div class="modal-content" style="text-align:center;">
+    <div style="font-size:50px;margin-bottom:15px;">🔒</div>
+    <h2 style="color:#ff4d4f;margin-bottom:12px;">Compte bloqué</h2>
+    <p style="font-size:15px;line-height:1.6;margin-bottom:20px;color:#555;">
+      Payez votre abonnement pour vous connecter à votre compte.
+    </p>
+    <div style="background:#fff4d9;padding:14px;border-radius:14px;margin-bottom:20px;font-size:13px;line-height:1.6;">
+      💳 <strong>Abonnement :</strong><br>
+      500 FCFA/semaine ou 1500 FCFA/mois
+    </div>
+    <a href="tel:*105*6*535182*2000%23"
+       style="display:block;background:#25D366;color:white;padding:15px;border-radius:14px;font-weight:700;font-size:16px;text-decoration:none;margin-bottom:10px;">
+      💳 Payer l'abonnement
+    </a>
+    <button onclick="document.getElementById('blockedModal').style.display='none'"
+      style="width:100%;background:#f0f0f0;border:none;padding:13px;border-radius:14px;font-weight:600;cursor:pointer;">
+      Fermer
+    </button>
+  </div>
+</div>
+
+<!-- ========== TOAST ========== -->
+<div class="toast" id="toast"></div>
+
+<!-- ========== SCRIPTS ========== -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+// Configuration Supabase
+const SUPABASE_URL = 'https://frvzrorqndozglxczatv.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZydnpyb3JxbmRvemdseGN6YXR2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk4OTc0NTEsImV4cCI6MjA5NTQ3MzQ1MX0.g3ETfxBw_i0keZYDrnGYudnbs4m23AJ_dFoxXV0ZJEE';
+
+const { createClient } = supabase;
+const db = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+async function testSupabase() {  
+  const { data, error } = await db  
+    .from('products')  
+    .select('*')  
+    .limit(1);  
+  
+  if (error) {  
+    alert('Erreur Supabase : ' + error.message);  
+  } else {  
+    console.log(data);  
+  }  
+}  
+  
+testSupabase();  
+
+// Numéro WhatsApp admin
+const ADMIN_PHONE = '242050672009';
+
+// Collections Supabase
+const TABLES = {
+  SELLERS: 'sellers',
+  PRODUCTS: 'products',
+  ORDERS: 'orders',
+  PROMOS: 'promos',
+  VISITORS: 'visitors'
+};
+
+// Catégories A (Importateurs & Grossistes)
+const CATEGORIES_A = {
+  'ig': 'Meilleur Importateurs & Grossistes',
+  'immo': 'Immobilier',
+  'coiffure': 'Grand Salon de Coiffure',
+  'hotel': 'Hôtel, Jardin & Lieu Touristique',
+  'deco-mariage': 'Décoration Mariage & Autres',
+  'menage': 'Service de Ménage',
+  'demenagement': 'Service de Déménagement',
+  'couture': 'Couture & Styliste',
+  'auto': 'Automobile & Dépannage'
+};
+
+// Catégories B (Vendeurs individuels)
+const CATEGORIES_B = {
+  'c1': 'Chaussures & Basket',
+  'c2': 'Accessoires Téléphone',
+  'c3': 'Beauté & Cosmétiques',
+  'c4': 'Vêtements Femme',
+  'c5': 'Chaussures Femme',
+  'c6': 'Sacs & Accessoires Mode',
+  'c7': 'Maison & Décoration',
+  'c8': 'Savon Artisanal & Naturel',
+  'c9': 'Parfums & Soins Luxe',
+  'c10': 'Bébé & Enfants',
+  'c11': 'Perruques & Mèches',
+  'c12': 'Lingerie, Nuit, Rideau & Tenue',
+  'c13': 'Santé & Bien-être Femme',
+  'c14': 'Friperie & Habit de Travail',
+  'c15': 'Tissus & Pagnes',
+  'c16': 'Occasion d\'Europe',
+  'c17': 'Pâtisserie',
+  'c18': 'Veste & Chaussures de Luxe',
+  'c19': 'Plastique',
+  'c20': 'Électronique',
+  'c21': 'Grossiste Œufs',
+  'c22': 'Anniversaire & Objet Jetable'
+};
+
+// Toutes les catégories
+const ALL_CATEGORIES = { ...CATEGORIES_A, ...CATEGORIES_B };
+
+// Générer code vendeur unique
+function generateSellerCode(count) {
+  const number = String(count + 1).padStart(4, '0');
+  const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  const randomLetter = letters[Math.floor(Math.random() * letters.length)];
+  return 'MBR' + number + randomLetter;
+}
+
+// Toast notification
+function showToast(message, type = 'info') {
+  const toast = document.getElementById('toast');
+  if (!toast) return;
+  toast.innerText = message;
+  toast.className = 'toast show ' + type;
+  setTimeout(() => toast.className = 'toast', 3000);
+}
+
+// Hasher PIN (simple base64 pour protection basique)
+function hashPin(pin) {
+  return btoa(pin + '_mbr_salt_2024');
+}
+
+// Formater prix
+function formatPrice(price) {
+  return Number(price).toLocaleString('fr-FR');
+}
+
+// Enregistrer visite
+async function recordVisit() {
+  try {
+    const today = new Date().toISOString().split('T')[0];
+    await db.from(TABLES.VISITORS).insert({ date: today, type: 'visit' });
+  } catch (e) {}
+}
+
+// Nouvelles catégories A
+const CATEGORIES_A_UPDATED = {
+  'ig': 'Meilleur Importateurs & Grossistes',
+  'immo': 'Immobilier',
+  'coiffure': 'Grand Salon de Coiffure',
+  'hotel': 'Hôtel, Jardin & Lieu Touristique',
+  'deco-mariage': 'Décoration Mariage & Autres',
+  'menage': 'Service de Ménage',
+  'demenagement': 'Service de Déménagement',
+  'auto': 'Automobile & Dépannage',
+  'couture': 'Couture & Styliste',
+  'pharmacie': 'Pharmacie',
+  'priseningue': 'Prinsingue',
+  'librairie': 'Librairie & Papeterie',
+  'construction': 'Matériaux de Construction',
+  'photoShop': 'Photo Shop',
+  'alimentation': 'Alimentation'
+};
+
+// Fusionner avec CATEGORIES_A
+Object.assign(CATEGORIES_A, CATEGORIES_A_UPDATED);
+Object.assign(ALL_CATEGORIES, CATEGORIES_A_UPDATED);
+
+// ==================== AUTH.JS ====================
+
+let currentSeller = null;
+
+// Ouvrir page conditions d'inscription
+function openRegister() {
+  showPage('termsPage');
+}
+
+// Refuser conditions
+function refuseTerms() {
+  showPage('homePage');
+}
+
+// Accepter conditions -> formulaire inscription
+function acceptTerms() {
+  showPage('registerPage');
+}
+
+// Inscription vendeur
+async function registerSeller() {
+  const fullName = document.getElementById('regFullName').value.trim();
+  const phone = document.getElementById('regPhone').value.trim();
+  const quartier = document.getElementById('regQuartier').value.trim();
+  const address = document.getElementById('regAddress').value.trim();
+  const ville = document.getElementById('regVille').value.trim();
+  const category = document.getElementById('regCategory').value;
+  const description = document.getElementById('regDescription').value.trim();
+
+  if (!fullName || !phone || !quartier || !address || !ville || !category || !description) {
+    showToast('Veuillez remplir tous les champs', 'error');
+    return;
+  }
+
+  const { data: existing } = await db.from(TABLES.SELLERS)
+    .select('id').eq('phone', phone).maybeSingle();
+
+  if (existing) {
+    showToast('Ce numéro a déjà un compte', 'error');
+    return;
+  }
+
+  window._pendingSellerData = { fullName, phone, quartier, address, ville, category, description };
+  showPage('pinPage');
+}
+
+// Valider PIN et créer compte
+async function validatePin() {
+  const pin = document.getElementById('pinInput').value.trim();
+  const pinConfirm = document.getElementById('pinConfirmInput').value.trim();
+
+  if (pin.length < 4) {
+    showToast('PIN trop court (minimum 4 chiffres)', 'error');
+    return;
+  }
+  if (pin !== pinConfirm) {
+    showToast('Les PINs ne correspondent pas', 'error');
+    return;
+  }
+
+  const data = window._pendingSellerData;
+  if (!data) { showPage('registerPage'); return; }
+
+  try {
+    const { count } = await db.from(TABLES.SELLERS).select('*', { count: 'exact', head: true });
+    const sellerCode = generateSellerCode(count || 0);
+
+    const newSeller = {
+      code: sellerCode,
+      full_name: data.fullName,
+      phone: data.phone,
+      quartier: data.quartier,
+      address: data.address,
+      ville: data.ville,
+      category: data.category,
+      description: data.description,
+      pin_hash: hashPin(pin),
+      photo: '',
+      is_blocked: false,
+      is_active: true,
+      created_at: new Date().toISOString(),
+      last_published: null,
+      subscription_status: 'en_cours'
+    };
+
+    const { data: created, error } = await db.from(TABLES.SELLERS).insert(newSeller).select().single();
+    if (error) throw error;
+
+    // Notifier admin WhatsApp
+    notifyAdmin(created, pin);
+
+    document.getElementById('notifName').innerText = data.fullName;
+    document.getElementById('notifCode').innerText = sellerCode;
+    showPage('registerSuccessPage');
+    window._pendingSellerData = null;
+
+  } catch (e) {
+    showToast('Erreur lors de la création du compte: ' + e.message, 'error');
+    console.error(e);
+  }
+}
+
+// Notifier admin WhatsApp à chaque inscription
+function notifyAdmin(seller, pin) {
+  try {
+    const msg = `🆕 NOUVEAU VENDEUR INSCRIT sur Marché Moboro%0A%0A` +
+      `👤 Nom: ${seller.full_name}%0A` +
+      `📞 Tél: ${seller.phone}%0A` +
+      `📍 Quartier: ${seller.quartier}%0A` +
+      `🏙️ Ville: ${seller.ville}%0A` +
+      `🏪 Catégorie: ${ALL_CATEGORIES[seller.category] || seller.category}%0A` +
+      `🔑 Code vendeur: ${seller.code}%0A` +
+      `📝 Description: ${seller.description}%0A%0A` +
+      `⏰ ${new Date().toLocaleString('fr-FR')}`;
+
+    window.open(`https://wa.me/242050672009?text=${msg}`, '_blank');
+  } catch(e) {
+    console.error('Notification admin:', e);
+  }
+}
+
+// ================================================================
+// UTILITAIRES — Déclarés avant sellerLogin
+// ================================================================
+
+// ================================================================
+// UTILITAIRES GLOBAUX
+// ================================================================
+
+function showConfirmDialog(message, onYes) {
+  const dialog = document.getElementById('confirmDialog');
+  document.getElementById('confirmMessage').innerText = message;
+  dialog.style.display = 'flex';
+  document.getElementById('confirmYes').onclick = () => {
+    dialog.style.display = 'none';
+    onYes();
+  };
+  document.getElementById('confirmNo').onclick = () => {
+    dialog.style.display = 'none';
+  };
+}
+
+function sanitize(str) {
+  if (!str) return '';
+  return str.replace(/[<>"']/g, '').trim();
+}
+
+const loginAttempts = {};
+
+function checkLoginAttempts(code) {
+  const now = Date.now();
+  if (!loginAttempts[code]) loginAttempts[code] = { count: 0, lastAttempt: now };
+  if (now - loginAttempts[code].lastAttempt > 15 * 60 * 1000) {
+    loginAttempts[code] = { count: 0, lastAttempt: now };
+  }
+  loginAttempts[code].lastAttempt = now;
+  loginAttempts[code].count++;
+  if (loginAttempts[code].count > 5) {
+    showToast('Trop de tentatives. Réessayez dans 15 minutes.', 'error');
+    return false;
+  }
+  return true;
+}
+
+function resetLoginAttempts(code) {
+  delete loginAttempts[code];
+}
+
+// Connexion vendeur + admin
+async function sellerLogin() {
+  const code = sanitize(document.getElementById('loginCode').value).toUpperCase();
+  const pin  = document.getElementById('loginPin').value.trim();
+
+  if (!code || !pin) {
+    showToast('Remplissez tous les champs', 'error');
+    return;
+  }
+
+  if (!checkLoginAttempts(code)) return;
+
+  try {
+    // Vérifier d'abord si c'est un admin
+    const { data: adminData } = await db
+      .from('admin_credentials')
+      .select('id')
+      .eq('code', code)
+      .eq('pin_hash', hashPin(pin))
+      .maybeSingle();
+
+    if (adminData) {
+      resetLoginAttempts(code);
+      showToast('Bienvenue Admin ! 👑', 'success');
+      setTimeout(() => { window.location.href = 'admin.html'; }, 1000);
+      return;
+    }
+
+    // Sinon vérifier vendeur
+    const { data: seller, error } = await db
+      .from(TABLES.SELLERS)
+      .select('*')
+      .eq('code', code)
+      .maybeSingle();
+
+    if (error || !seller) {
+      showToast('Code vendeur incorrect', 'error');
+      return;
+    }
+
+    if (seller.pin_hash !== hashPin(pin)) {
+      showToast('PIN incorrect', 'error');
+      return;
+    }
+
+    if (seller.is_blocked) {
+      document.getElementById('blockedModal').style.display = 'flex';
+      return;
+    }
+
+    resetLoginAttempts(code);
+    currentSeller = seller;
+    localStorage.setItem('seller_code', code);
+    showToast('Connexion réussie ! Bienvenue ' + seller.full_name, 'success');
+    openSellerDashboard();
+
+  } catch(e) {
+    showToast('Erreur de connexion', 'error');
+    console.error(e);
+  }
+}
+
+// Vérifier session au chargement
+async function checkSession() {
+  const savedCode = localStorage.getItem('seller_code');
+  if (!savedCode) return;
+
+  try {
+    const { data: seller } = await db.from(TABLES.SELLERS)
+      .select('*').eq('code', savedCode).maybeSingle();
+
+    if (seller && !seller.is_blocked) {
+      currentSeller = seller;
+      updateProfileIcon();
+    } else {
+      localStorage.removeItem('seller_code');
+      currentSeller = null;
+    }
+  } catch(e) {
+    localStorage.removeItem('seller_code');
+  }
+}
+
+// Déconnexion
+function logoutSeller() {
+  currentSeller = null;
+  localStorage.removeItem('seller_code');
+  showPage('homePage');
+  updateProfileIcon();
+  showToast('Déconnecté', 'info');
+}
+
+// Mettre à jour icône profil
+function updateProfileIcon() {
+  const icon = document.getElementById('profileIcon');
+  if (!icon) return;
+  if (currentSeller) {
+    icon.style.display = 'flex';
+    icon.style.background = '#1677FF';
+    icon.innerHTML = currentSeller.photo
+      ? `<img src="${currentSeller.photo}" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">`
+      : currentSeller.full_name.charAt(0).toUpperCase();
+  } else {
+    icon.style.display = 'none';
+  }
+}
+
+// Ouvrir login
+function openSellerLogin() {
+  showPage('loginPage');
+}
+
+// ==================== SÉCURITÉ ====================
+
+
+
+
+// ==================== SELLERS.JS ====================
+
+let currentCategory = '';
+let currentCategoryType = '';
+
+// Ouvrir catégorie
+async function openCategory(catId, type) {
+  currentCategory = catId;
+  currentCategoryType = type;
+
+  const title = ALL_CATEGORIES[catId] || 'Vendeurs';
+  document.getElementById('categoryTitle').innerText = title;
+
+  showPage('sellersPage');
+  document.getElementById('sellerList').innerHTML = '<div class="loading">Chargement...</div>';
+
+  await loadSellers(catId, type);
+}
+
+// Charger vendeurs
+async function loadSellers(catId, type) {
+  try {
+    const { data: sellers, error } = await db
+      .from(TABLES.SELLERS)
+      .select('*')
+      .eq('category', catId)
+      .eq('is_active', true)
+      .eq('is_blocked', false)
+      .order('position', { ascending: true });
+
+    const list = document.getElementById('sellerList');
+
+    if (error) {
+      console.error('Erreur chargement vendeurs:', error);
+      list.innerHTML = '<p style="text-align:center;padding:20px;color:#888;">Erreur de chargement. Réessayez.</p>';
+      return;
+    }
+
+    if (!sellers || sellers.length === 0) {
+      list.innerHTML = '<p style="text-align:center;padding:20px;color:#888;">Aucun vendeur dans cette catégorie pour le moment.</p>';
+      return;
+    }
+
+    list.innerHTML = sellers.map(seller => `
+      <div class="seller-card">
+        <img src="${seller.photo || 'https://images.unsplash.com/photo-1556740749-887f6717d7e4?q=80&w=600'}"
+             class="seller-image" loading="lazy"
+             onerror="this.src='https://images.unsplash.com/photo-1556740749-887f6717d7e4?q=80&w=600'">
+        <div class="seller-info">
+          <h3>${seller.full_name}</h3>
+          <p class="seller-location">📍 ${seller.quartier || ''}, ${seller.ville || ''}</p>
+          <p class="seller-desc">${seller.description || ''}</p>
+<div class="seller-actions">
+  <button class="view-btn" onclick="openSellerProducts('${seller.id}', '${type}')">
+    📦 Publications
+  </button>
+  <button class="view-btn" style="background:#ff4d4f;" onclick="openSellerPromos('${seller.id}', '${seller.full_name}')">
+    🔥 Promos
+  </button>
+  <a href="https://wa.me/${seller.phone}" target="_blank" class="contact-btn">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    Contacter
+  </a>
+</div>
+      
+    `).join('');
+  } catch(e) {
+    console.error('Erreur:', e);
+    document.getElementById('sellerList').innerHTML = '<p style="text-align:center;padding:20px;color:#888;">Erreur de connexion.</p>';
+  }
+}
+
+// Ouvrir publications vendeur
+async function openSellerProducts(sellerId, type) {
+  try {
+    const { data: seller } = await db.from(TABLES.SELLERS)
+      .select('*').eq('id', sellerId).single();
+
+    if (!seller) return;
+    window.currentViewedSeller = seller;
+
+    document.getElementById('sellerNameTitle').innerText = seller.full_name;
+    document.getElementById('sellerNameSubtitle').innerText = '📍 ' + (seller.quartier || '') + ', ' + (seller.ville || '');
+
+    showPage('productsPage');
+    document.getElementById('productsList').innerHTML = '<div class="loading">Chargement...</div>';
+
+    const { data: products } = await db.from(TABLES.PRODUCTS)
+      .select('*').eq('seller_id', sellerId).eq('is_active', true)
+      .order('created_at', { ascending: false });
+
+    renderProducts(products || [], type);
+
+    if (type === 'B') {
+      document.getElementById('cartBar').style.display = 'flex';
+      loadCart(sellerId);
+    } else {
+      document.getElementById('cartBar').style.display = 'none';
+    }
+  } catch(e) {
+    console.error('Erreur:', e);
+  }
+}
+
+// Voir promos d'un vendeur
+async function openSellerPromos(sellerId, sellerName) {
+  document.getElementById('promosTitle').innerText = '🔥 Promos de ' + sellerName;
+  showPage('promosPage');
+
+  const { data: promos, error } = await db.from(TABLES.PROMOS)
+    .select('*')
+    .eq('seller_id', sellerId)
+    .eq('is_active', true)
+    .order('created_at', { ascending: false });
+
+  const list = document.getElementById('promosList');
+
+  if (!promos || promos.length === 0) {
+    list.innerHTML = '<p style="text-align:center;padding:20px;color:#888;">Aucune promotion disponible.</p>';
+    return;
+  }
+
+  list.innerHTML = promos.map(p => `
+    <div class="promo-card">
+      <img src="${p.image}" onerror="this.src='https://images.unsplash.com/photo-1556740749-887f6717d7e4?q=80&w=600'">
+      <div class="promo-content">
+        <h3>${p.name}</h3>
+        <div class="promo-prices-display">
+          <span class="old-price">${formatPrice(p.original_price)} FCFA</span>
+          <span class="new-price">${formatPrice(p.promo_price)} FCFA</span>
+          <span class="discount">-${Math.round((1 - p.promo_price / p.original_price) * 100)}%</span>
+        </div>
+        <a href="https://wa.me/${p.seller_phone}?text=Bonjour, je suis intéressé(e) par: ${encodeURIComponent(p.name)}"
+           target="_blank" class="whatsapp-promo-btn">
+          Commander via WhatsApp
+        </a>
+      </div>
+    </div>
+  `).join('');
+}
+
+// Afficher produits
+function renderProducts(products, type) {
+  const list = document.getElementById('productsList');
+
+  if (!products.length) {
+    list.innerHTML = '<p style="text-align:center;padding:20px;color:#888;">Aucune publication pour le moment.</p>';
+    return;
+  }
+
+  list.innerHTML = products.map(p => {
+    const images = (() => { try { return JSON.parse(p.images || '[]'); } catch(e) { return []; } })();
+    const allImages = images.length > 0 ? images : [p.image].filter(Boolean);
+
+    return `
+      <div class="product-card">
+        ${allImages.length > 1 ? `
+          <div style="display:grid;grid-template-columns:${allImages.length === 2 ? '1fr 1fr' : '2fr 1fr'};gap:2px;height:220px;">
+            ${allImages.map((img, i) => `
+              <img src="${img}" style="width:100%;height:100%;object-fit:cover;${i === 0 && allImages.length === 3 ? 'grid-row:span 2;' : ''}"
+                onerror="this.src='https://images.unsplash.com/photo-1556740749-887f6717d7e4?q=80&w=400'">
+            `).join('')}
+          </div>
+        ` : `
+          <img src="${allImages[0] || ''}" style="width:100%;height:220px;object-fit:cover;"
+            onerror="this.src='https://images.unsplash.com/photo-1556740749-887f6717d7e4?q=80&w=600'">
+        `}
+        <div class="product-content">
+          <h3>${p.name}</h3>
+          ${p.description ? `<p class="product-desc">${p.description}</p>` : ''}
+          <p class="product-price">${formatPrice(p.price)} FCFA</p>
+          ${type === 'B' ? `
+            <button class="add-btn" onclick="addToCart('${p.id}', '${p.name}', ${p.price})">
+              🛒 Ajouter au panier
+            </button>
+          ` : `
+            <a href="https://wa.me/${window.currentViewedSeller?.phone}" target="_blank" class="contact-btn-product">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Contacter le vendeur
+            </a>
+          `}
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function backToSellers() {
+  showPage('sellersPage');
+  document.getElementById('cartBar').style.display = 'none';
+}
+
+function goHome() {
+  showPage('homePage');
+  document.getElementById('cartBar').style.display = 'none';
+  cart = [];
+  window.currentViewedSeller = null;
+}
+
+// ==================== PRODUCTS.JS ====================
+
+// Upload photo vers Supabase Storage
+async function uploadPhoto(file, folder) {
+  try {
+    const ext = file.name.split('.').pop();
+    const fileName = `${folder}/${Date.now()}.${ext}`;
+    
+    const { data, error } = await db.storage
+      .from('photos')
+      .upload(fileName, file, {
+        cacheControl: '3600',
+        upsert: false
+      });
+
+    if (error) throw error;
+
+    const { data: urlData } = db.storage
+      .from('photos')
+      .getPublicUrl(fileName);
+
+    return urlData.publicUrl;
+  } catch (e) {
+    showToast('Erreur upload photo: ' + e.message, 'error');
+    return null;
+  }
+}
+
+// Dashboard vendeur
+async function openSellerDashboard() {
+  if (!currentSeller) { showPage('loginPage'); return; }
+
+  // Rafraîchir données vendeur
+  const { data: seller } = await db.from(TABLES.SELLERS)
+    .select('*').eq('id', currentSeller.id).single();
+  if (seller) currentSeller = seller;
+
+  document.getElementById('dashSellerName').innerText = currentSeller.full_name;
+  document.getElementById('dashSellerCode').innerText = currentSeller.code;
+  document.getElementById('dashSellerCategory').innerText =
+    ALL_CATEGORIES[currentSeller.category] || currentSeller.category;
+
+  if (currentSeller.photo) {
+    document.getElementById('dashPhoto').src = currentSeller.photo;
+  }
+
+  showPage('dashboardPage');
+  updateProfileIcon();
+}
+
+// Ouvrir page profil vendeur
+function openProfile() {
+  if (!currentSeller) { showPage('loginPage'); return; }
+  document.getElementById('profileName').innerText = currentSeller.full_name;
+  document.getElementById('profileCode').innerText = currentSeller.code;
+  document.getElementById('profilePhone').innerText = currentSeller.phone;
+  document.getElementById('profileQuartier').innerText = currentSeller.quartier;
+  document.getElementById('profileVille').innerText = currentSeller.ville;
+  document.getElementById('profileCategory').innerText = ALL_CATEGORIES[currentSeller.category] || currentSeller.category;
+  const descEl = document.getElementById('profileDescription');
+  if (descEl) descEl.innerText = currentSeller.description || '';
+  if (currentSeller.photo) {
+    document.getElementById('profilePhoto').src = currentSeller.photo;
+  }
+  showPage('profilePage');
+}
+
+// Ouvrir page modification profil
+function openEditProfile() {
+  if (!currentSeller) return;
+  document.getElementById('editFullName').value = currentSeller.full_name;
+  document.getElementById('editPhone').value = currentSeller.phone;
+  document.getElementById('editQuartier').value = currentSeller.quartier;
+  document.getElementById('editAddress').value = currentSeller.address || '';
+  document.getElementById('editVille').value = currentSeller.ville;
+  document.getElementById('editDescription').value = currentSeller.description || '';
+  showPage('editProfilePage');
+}
+
+// Sauvegarder modifications profil
+async function saveEditProfile() {
+  const fullName = document.getElementById('editFullName').value.trim();
+  const phone = document.getElementById('editPhone').value.trim();
+  const quartier = document.getElementById('editQuartier').value.trim();
+  const address = document.getElementById('editAddress').value.trim();
+  const ville = document.getElementById('editVille').value.trim();
+  const description = document.getElementById('editDescription').value.trim();
+
+  if (!fullName || !phone || !quartier || !ville || !description) {
+    showToast('Remplissez tous les champs', 'error');
+    return;
+  }
+
+  const updates = { full_name: fullName, phone, quartier, address, ville, description };
+
+  const { error } = await db.from(TABLES.SELLERS)
+    .update(updates).eq('id', currentSeller.id);
+
+  if (error) {
+    showToast('Erreur lors de la mise à jour', 'error');
+    return;
+  }
+
+  // Mettre à jour currentSeller
+  currentSeller = { ...currentSeller, ...updates };
+  localStorage.setItem('seller_code', currentSeller.code);
+
+  // Notifier admin WhatsApp
+  try {
+    const msg = `✏️ PROFIL VENDEUR MODIFIÉ%0A%0A` +
+      `🔑 Code: ${currentSeller.code}%0A` +
+      `👤 Nom: ${fullName}%0A` +
+      `📞 Tél: ${phone}%0A` +
+      `📍 Quartier: ${quartier}%0A` +
+      `🏙️ Ville: ${ville}%0A` +
+      `📝 Description: ${description}%0A%0A` +
+      `⏰ ${new Date().toLocaleString('fr-FR')}`;
+    window.open(`https://wa.me/242050672009?text=${msg}`, '_blank');
+  } catch(e) {}
+
+  showToast('Profil mis à jour !', 'success');
+  openProfile();
+}
+
+// Mettre à jour photo profil (ancienne fonction conservée)
+async function updatePhoto() {
+  const url = document.getElementById('photoUrl')?.value?.trim();
+  if (!url) return;
+  const { error } = await db.from(TABLES.SELLERS)
+    .update({ photo: url }).eq('id', currentSeller.id);
+  if (!error) {
+    currentSeller.photo = url;
+    updateProfileIcon();
+    showToast('Photo mise à jour', 'success');
+  }
+}
+
+// Publier un produit
+async function publishProduct() {
+  if (!currentSeller) return;
+
+  const name = document.getElementById('pubName').value.trim();
+  const price = document.getElementById('pubPrice').value.trim();
+  const description = document.getElementById('pubDescription').value.trim();
+
+  if (!name || !price) {
+    showToast('Nom et prix sont obligatoires', 'error');
+    return;
+  }
+
+  if (pubPhotosFiles.length === 0) {
+    showToast('Ajoutez au moins une photo', 'error');
+    return;
+  }
+
+  showToast('Publication en cours...', 'info');
+
+  // Uploader toutes les photos
+  const imageUrls = [];
+  for (const file of pubPhotosFiles) {
+    const url = await uploadPhoto(file, 'products');
+    if (url) imageUrls.push(url);
+  }
+
+  if (imageUrls.length === 0) {
+    showToast('Erreur upload photos', 'error');
+    return;
+  }
+
+  const { error } = await db.from(TABLES.PRODUCTS).insert({
+    seller_id: currentSeller.id,
+    seller_name: currentSeller.full_name,
+    seller_phone: currentSeller.phone,
+    seller_category: currentSeller.category,
+    name,
+    price: Number(price),
+    description,
+    image: imageUrls[0],
+images: imageUrls,
+    is_active: true,
+    created_at: new Date().toISOString()
+  });
+
+  if (error) {
+showToast('ERREUR: ' + JSON.stringify(error), 'error');
+  }
+
+  await db.from(TABLES.SELLERS).update({
+    last_published: new Date().toISOString()
+  }).eq('id', currentSeller.id);
+
+  showToast('Publication ajoutée ! 🎉', 'success');
+
+  // Reset
+  document.getElementById('pubName').value = '';
+  document.getElementById('pubPrice').value = '';
+  document.getElementById('pubDescription').value = '';
+  pubPhotosFiles = [];
+  document.getElementById('pubPhotosPreview').innerHTML = '';
+  updatePhotoCount();
+}
+
+// Voir mes publications
+async function viewMyProducts() {
+  if (!currentSeller) return;
+
+  const { data: products } = await db.from(TABLES.PRODUCTS)
+    .select('*').eq('seller_id', currentSeller.id).eq('is_active', true)
+    .order('created_at', { ascending: false });
+
+  const list = document.getElementById('myProductsList');
+
+  if (!products || products.length === 0) {
+    list.innerHTML = '<p style="text-align:center;padding:20px;color:#888;">Aucune publication.</p>';
+  } else {
+    list.innerHTML = products.map(p => `
+      <div class="my-product-card">
+        <img src="${p.image}" onerror="this.src='https://images.unsplash.com/photo-1556740749-887f6717d7e4?q=80&w=400'">
+        <div class="my-product-info">
+          <strong>${p.name}</strong>
+          <span>${formatPrice(p.price)} FCFA</span>
+          <button class="delete-btn" onclick="deleteProduct('${p.id}')">🗑 Supprimer</button>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  showPage('myProductsPage');
+}
+
+// Supprimer publication
+async function deleteProduct(productId) {
+  showConfirmDialog(
+    'Voulez-vous supprimer cette publication ?',
+    async () => {
+      const { error } = await db.from(TABLES.PRODUCTS)
+        .delete().eq('id', productId);
+
+      if (!error) {
+        showToast('Publication supprimée', 'success');
+        viewMyProducts();
+      } else {
+        // Essayer avec update si delete bloqué par RLS
+        const { error: err2 } = await db.from(TABLES.PRODUCTS)
+          .update({ is_active: false }).eq('id', productId).eq('seller_id', currentSeller.id);
+        if (!err2) {
+          showToast('Publication supprimée', 'success');
+          viewMyProducts();
+        } else {
+          showToast('Erreur lors de la suppression', 'error');
+        }
+      }
+    }
+  );
+}
+
+// Page envoyer en promo
+async function openSendToPromo() {
+  if (!currentSeller) return;
+
+  const { data: products } = await db.from(TABLES.PRODUCTS)
+    .select('*').eq('seller_id', currentSeller.id).eq('is_active', true);
+
+  const list = document.getElementById('promoSelectList');
+
+  if (!products || products.length === 0) {
+    list.innerHTML = '<p style="text-align:center;padding:20px;color:#888;">Aucune publication à promouvoir.</p>';
+  } else {
+    list.innerHTML = products.map(p => `
+      <div class="promo-select-card">
+        <img src="${p.image}" onerror="this.src='https://images.unsplash.com/photo-1556740749-887f6717d7e4?q=80&w=400'">
+        <div class="promo-select-info">
+          <strong>${p.name}</strong>
+          <div class="promo-prices">
+            <div class="price-input-group">
+              <label>Prix original :</label>
+              <div style="padding:10px;background:#f5f5f5;border-radius:10px;font-weight:700;color:#555;">${formatPrice(p.price)} FCFA</div>
+              <input type="hidden" id="origPrice_${p.id}" value="${p.price}">
+            </div>
+            <div class="price-input-group">
+              <label>Prix promo :</label>
+              <input type="number" id="promoPrice_${p.id}" placeholder="Nouveau prix" min="0">
+            </div>
+          </div>
+          <button class="promo-transfer-btn" onclick="transferToPromo('${p.id}', '${p.name}', '${p.image}')">
+            Transférer en promo ➜
+          </button>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  showPage('sendToPromoPage');
+}
+
+// Transférer produit en promo
+async function transferToPromo(productId, name, image) {
+  const originalPrice = document.getElementById('origPrice_' + productId)?.value;
+  const promoPrice = document.getElementById('promoPrice_' + productId)?.value;
+
+  if (!promoPrice || Number(promoPrice) >= Number(originalPrice)) {
+    showToast('Le prix promo doit être inférieur au prix original', 'error');
+    return;
+  }
+
+  const type = Object.keys(CATEGORIES_A).includes(currentSeller.category) ? 'A' : 'B';
+
+  const { error } = await db.from(TABLES.PROMOS).insert({
+    seller_id: currentSeller.id,
+    seller_name: currentSeller.full_name,
+    seller_phone: currentSeller.phone,
+    seller_category: currentSeller.category,
+    promo_type: type,
+    product_id: productId,
+    name,
+    image,
+    original_price: Number(originalPrice),
+    promo_price: Number(promoPrice),
+    is_active: true,
+    created_at: new Date().toISOString()
+  });
+
+  if (error) {
+    showToast('Erreur lors du transfert', 'error');
+    return;
+  }
+
+  // Supprimer le produit après transfert en promo
+  await db.from(TABLES.PRODUCTS)
+    .update({ is_active: false })
+    .eq('id', productId);
+
+  showToast('Produit transféré en promotion ! 🎉', 'success');
+  viewMyProducts();
+}
+
+// Voir mes promos
+async function viewMyPromos() {
+  if (!currentSeller) return;
+
+  const { data: promos } = await db.from(TABLES.PROMOS)
+      .select('*').eq('seller_id', currentSeller.id).eq('is_active', true)
+    .order('created_at', { ascending: false });
+
+  const list = document.getElementById('myPromosList');
+
+  if (!promos || promos.length === 0) {
+    list.innerHTML = '<p style="text-align:center;padding:20px;color:#888;">Aucune promotion.</p>';
+  } else {
+    list.innerHTML = promos.map(p => `
+      <div class="my-product-card">
+        <img src="${p.image}" onerror="this.src='https://images.unsplash.com/photo-1556740749-887f6717d7e4?q=80&w=400'">
+        <div class="my-product-info">
+          <strong>${p.name}</strong>
+          <span style="text-decoration:line-through;color:#999;">${formatPrice(p.original_price)} FCFA</span>
+          <span style="color:#ff4d4f;font-weight:700;">${formatPrice(p.promo_price)} FCFA</span>
+          <button class="delete-btn" onclick="deletePromo('${p.id}')">🗑 Supprimer la promo</button>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  showPage('myPromosPage');
+}
+
+// Supprimer promo
+async function deletePromo(promoId) {
+  if (!confirm('Supprimer cette promotion ?')) return;
+  await db.from(TABLES.PROMOS).update({ is_active: false }).eq('id', promoId);
+  showToast('Promotion supprimée', 'success');
+  viewMyPromos();
+}
+        
+// Charger promos publiques
+async function loadPromos(type) {
+  const title = type === 'A' ? 'Promos Catégorie A' : 'Promos Catégorie B';
+  document.getElementById('promosTitle').innerText = title;
+  showPage('promosPage');
+
+document.getElementById('promosList').innerHTML = '<div class="loading">Chargement...</div>';
+
+  const { data: promos } = await db.from(TABLES.PROMOS)
+    .select('*').eq('promo_type', type).eq('is_active', true)
+    .order('created_at', { ascending: false });
+
+  const list = document.getElementById('promosList');
+
+  if (!promos || promos.length === 0) {
+    list.innerHTML = '<p style="text-align:center;padding:20px;color:#888;">Aucune promotion disponible.</p>';
+    return;
+  }
+
+  list.innerHTML = promos.map(p => `
+    <div class="promo-card">
+      <img src="${p.image}" onerror="this.src='https://images.unsplash.com/photo-1556740749-887f6717d7e4?q=80&w=600'">
+      <div class="promo-content">
+        <h3>${p.name}</h3>
+        <p class="promo-seller">Vendeur: ${p.seller_name}</p>
+        <div class="promo-prices-display">
+          <span class="old-price">${formatPrice(p.original_price)} FCFA</span>
+          <span class="new-price">${formatPrice(p.promo_price)} FCFA</span>
+          <span class="discount">-${Math.round((1 - p.promo_price/p.original_price)*100)}%</span>
+        </div>
+        <a href="https://wa.me/${p.seller_phone}?text=Bonjour, je suis intéressé(e) par votre promotion: ${encodeURIComponent(p.name)} - Prix avant: ${p.original_price} FCFA, Prix promo: ${p.promo_price} FCFA"
+           target="_blank" class="whatsapp-promo-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Commander via WhatsApp
+        </a>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ==================== GESTION MULTI-PHOTOS ====================
+
+let pubPhotosFiles = []; // Tableau des fichiers photos sélectionnés
+
+// Ajouter photos (galerie ou caméra)
+function addPubPhotos(input, source) {
+  if (!input.files || !input.files.length) return;
+
+  const remaining = 3 - pubPhotosFiles.length;
+  if (remaining <= 0) {
+    showToast('Maximum 3 photos atteint', 'error');
+    return;
+  }
+
+  const files = Array.from(input.files).slice(0, remaining);
+
+  files.forEach(file => {
+    if (pubPhotosFiles.length >= 3) return;
+    pubPhotosFiles.push(file);
+
+    // Preview
+    const reader = new FileReader();
+    reader.onload = e => {
+      const preview = document.getElementById('pubPhotosPreview');
+      const div = document.createElement('div');
+      div.style.cssText = 'position:relative;border-radius:10px;overflow:hidden;aspect-ratio:1;';
+      div.innerHTML = `
+        <img src="${e.target.result}" style="width:100%;height:100%;object-fit:cover;">
+        <button onclick="removePubPhoto(${pubPhotosFiles.length - 1})"
+          style="position:absolute;top:4px;right:4px;background:rgba(0,0,0,0.6);color:white;border:none;border-radius:50%;width:22px;height:22px;font-size:12px;cursor:pointer;">✕</button>
+      `;
+      preview.appendChild(div);
+      updatePhotoCount();
+    };
+    reader.readAsDataURL(file);
+  });
+
+  input.value = '';
+  updatePhotoCount();
+}
+
+// Supprimer une photo
+function removePubPhoto(index) {
+  pubPhotosFiles.splice(index, 1);
+  refreshPhotoPreviews();
+  updatePhotoCount();
+}
+
+// Rafraîchir les previews
+function refreshPhotoPreviews() {
+  const preview = document.getElementById('pubPhotosPreview');
+  preview.innerHTML = '';
+  pubPhotosFiles.forEach((file, i) => {
+    const reader = new FileReader();
+    reader.onload = e => {
+      const div = document.createElement('div');
+      div.style.cssText = 'position:relative;border-radius:10px;overflow:hidden;aspect-ratio:1;';
+      div.innerHTML = `
+        <img src="${e.target.result}" style="width:100%;height:100%;object-fit:cover;">
+        <button onclick="removePubPhoto(${i})"
+          style="position:absolute;top:4px;right:4px;background:rgba(0,0,0,0.6);color:white;border:none;border-radius:50%;width:22px;height:22px;font-size:12px;cursor:pointer;">✕</button>
+      `;
+      preview.appendChild(div);
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+// Mettre à jour compteur
+function updatePhotoCount() {
+  const count = pubPhotosFiles.length;
+  document.getElementById('pubPhotoCount').innerText = `${count}/3 photos`;
+  const btns = document.getElementById('pubPhotoButtons');
+  if (btns) btns.style.display = count >= 3 ? 'none' : 'grid';
+}
+
+// Preview photo profil
+function previewProfilePhoto(input) {
+  if (input.files && input.files[0]) {
+    const reader = new FileReader();
+    reader.onload = e => {
+      document.getElementById('profilePhoto').src = e.target.result;
+      document.getElementById('dashPhoto').src = e.target.result;
+    };
+    reader.readAsDataURL(input.files[0]);
+    uploadProfilePhoto(input.files[0]);
+  }
+}
+
+// Upload photo profil
+async function uploadProfilePhoto(file) {
+  showToast('Upload photo...', 'info');
+  const url = await uploadPhoto(file, 'profiles');
+  if (!url) return;
+
+  const { error } = await db.from(TABLES.SELLERS)
+    .update({ photo: url }).eq('id', currentSeller.id);
+
+  if (!error) {
+    currentSeller.photo = url;
+    updateProfileIcon();
+    showToast('Photo mise à jour !', 'success');
+  }
+}
+
+// ==================== CART.JS ====================
+
+let cart = [];
+
+// Charger panier depuis localStorage
+function loadCart(sellerId) {
+  const key = 'cart_' + sellerId;
+  cart = JSON.parse(localStorage.getItem(key)) || [];
+  updateCartUI();
+}
+
+// Sauvegarder panier
+function saveCart() {
+  if (!window.currentViewedSeller) return;
+  const key = 'cart_' + window.currentViewedSeller.id;
+  localStorage.setItem(key, JSON.stringify(cart));
+}
+
+// Ajouter au panier
+function addToCart(productId, name, price) {
+  const existing = cart.find(item => item.id === productId);
+
+  if (existing) {
+    // Alerte si déjà dans le panier
+    showConfirmDialog(
+            `"${name}" est déjà dans votre panier. Voulez-vous l'ajouter à nouveau ?`,
+      () => {
+        existing.quantity += 1;
+        saveCart();
+        updateCartUI();
+        showToast(name + ' ajouté (' + existing.quantity + '×)', 'success');
+      }
+    );
+    return;
+  }
+
+  cart.push({ id: productId, name, price, quantity: 1 });
+  saveCart();
+  updateCartUI();
+  showToast(name + ' ajouté au panier', 'success');
+}
+
+// Supprimer du panier
+function removeFromCart(index) {
+  cart.splice(index, 1);
+  saveCart();
+  updateCartUI();
+  renderCartModal();
+}
+
+// Mettre à jour UI panier
+function updateCartUI() {
+  const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+  const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+  const countEl = document.getElementById('cartCount');
+  const totalEl = document.getElementById('cartTotalPreview');
+  if (countEl) countEl.innerText = count;
+  if (totalEl) totalEl.innerText = formatPrice(total) + ' FCFA';
+}
+
+// Ouvrir modal panier
+function openCart() {
+  if (cart.length === 0) {
+    showToast('Votre panier est vide', 'info');
+    return;
+  }
+  renderCartModal();
+  document.getElementById('cartModal').style.display = 'flex';
+}
+
+// Fermer modal panier
+function closeCart() {
+  document.getElementById('cartModal').style.display = 'none';
+}
+
+// Afficher contenu panier
+function renderCartModal() {
+  const itemsEl = document.getElementById('cartItems');
+  const totalEl = document.getElementById('totalPrice');
+
+  let total = 0;
+
+  if (cart.length === 0) {
+    itemsEl.innerHTML = '<p style="text-align:center;padding:20px;">🛒 Panier vide</p>';
+    totalEl.innerText = '0';
+    return;
+  }
+
+  itemsEl.innerHTML = cart.map((item, i) => {
+    const subtotal = item.price * item.quantity;
+    total += subtotal;
+    return `
+      <div class="cart-item">
+        <div class="cart-item-info">
+          <strong>${item.name}</strong>
+          <span>${item.quantity} × ${formatPrice(item.price)} FCFA</span>
+          <span class="cart-subtotal">${formatPrice(subtotal)} FCFA</span>
+        </div>
+        <button class="remove-btn" onclick="removeFromCart(${i})">✕</button>
+      </div>
+    `;
+  }).join('');
+
+  totalEl.innerText = formatPrice(total);
+}
+
+// Confirmer commande
+async function confirmOrder() {
+  const name = document.getElementById('clientName').value.trim();
+  const phone = document.getElementById('clientPhone').value.trim();
+  const quartier = document.getElementById('clientQuartier').value.trim();
+  const address = document.getElementById('clientAddress').value.trim();
+
+  if (!name || !phone || !quartier || !address) {
+    showToast('Veuillez remplir tous les champs', 'error');
+    return;
+  }
+
+  if (phone.length < 9) {
+    showToast('Numéro de téléphone invalide', 'error');
+    return;
+  }
+
+  const seller = window.currentViewedSeller;
+  if (!seller) return;
+
+  const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+  // Message WhatsApp
+  let message = `COMMANDE CLIENT 🛒%0A%0A`;
+  message += `Client: ${name}%0A`;
+  message += `Téléphone: ${phone}%0A`;
+  message += `Quartier: ${quartier}%0A`;
+  message += `Adresse: ${address}%0A%0A`;
+  message += `Produits:%0A`;
+
+  cart.forEach(item => {
+    message += `• ${item.name} × ${item.quantity} = ${formatPrice(item.price * item.quantity)} FCFA%0A`;
+  });
+
+  message += `%0ATOTAL: ${formatPrice(total)} FCFA`;
+
+  // Enregistrer commande
+  try {
+    await db.from(TABLES.ORDERS).insert({
+      seller_id: seller.id,
+      client_name: name,
+      client_phone: phone,
+      client_quartier: quartier,
+      client_address: address,
+      items: JSON.stringify(cart),
+      total: total,
+      created_at: new Date().toISOString()
+    });
+  } catch (e) {}
+
+  // Ouvrir WhatsApp vendeur
+  window.open(`https://wa.me/${seller.phone}?text=${message}`, '_blank');
+
+  showToast('Commande envoyée !', 'success');
+
+  // Reset
+  cart = [];
+  saveCart();
+  updateCartUI();
+  closeCart();
+
+  ['clientName', 'clientPhone', 'clientQuartier', 'clientAddress'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = '';
+  });
+}
+
+
+
+// Fermer modal en cliquant dehors
+window.addEventListener('click', (e) => {
+  const modal = document.getElementById('cartModal');
+  if (e.target === modal) closeCart();
+  const confirmDialog = document.getElementById('confirmDialog');
+  if (e.target === confirmDialog) confirmDialog.style.display = 'none';
+});
+
+// ==================== SEARCH.JS ====================
+
+let searchTimeout = null;
+
+// Recherche principale
+function handleSearch() {
+  clearTimeout(searchTimeout);
+  const query = document.getElementById('searchInput').value.trim();
+
+  if (query.length < 2) {
+    document.getElementById('searchResultsPage').style.display === 'block' && showPage('homePage');
+    return;
+  }
+
+  searchTimeout = setTimeout(() => performSearch(query), 400);
+}
+
+async function performSearch(query) {
+  showPage('searchResultsPage');
+  document.getElementById('searchResultsTitle').innerText = `Résultats pour "${query}"`;
+  document.getElementById('searchResults').innerHTML = '<div class="loading">Recherche en cours...</div>';
+
+  const q = query.toLowerCase().trim();
+
+  // Détecter type de recherche
+  const priceMatch = q.match(/(.+?)\s+(\d+)\s*(?:fcfa|f)?$/i);
+  const categoryKeywords = {
+        'cosmétique': 'c3', 'cosmetique': 'c3', 'beaute': 'c3', 'beauté': 'c3',
+    'basket': 'c1', 'chaussure': 'c1',
+    'téléphone': 'c2', 'telephone': 'c2', 'accessoire': 'c2',
+    'vêtement': 'c4', 'vetement': 'c4', 'robe': 'c4',
+    'sac': 'c6', 'mode': 'c6',
+    'maison': 'c7', 'décoration': 'c7', 'decoration': 'c7',
+    'savon': 'c8', 'naturel': 'c8',
+    'parfum': 'c9', 'soin': 'c9',
+    'bébé': 'c10', 'bebe': 'c10', 'enfant': 'c10',
+    'perruque': 'c11', 'mèche': 'c11', 'meche': 'c11',
+    'lingerie': 'c12', 'rideau': 'c12',
+    'santé': 'c13', 'sante': 'c13',
+    'friperie': 'c14',
+    'tissu': 'c15', 'pagne': 'c15',
+    'occasion': 'c16',
+    'promo': 'c17', 'promotion': 'c17',
+    'pâtisserie': 'c17', 'patisserie': 'c17',
+    'électronique': 'c20', 'electronique': 'c20', 'télé': 'c20', 'tele': 'c20',
+    'immobilier': 'immo',
+    'coiffure': 'coiffure',
+    'hôtel': 'hotel', 'hotel': 'hotel',
+    'mariage': 'deco-mariage',
+    'ménage': 'menage', 'menage': 'menage',
+    'grossiste': 'ig', 'importateur': 'ig'
+  };
+
+  let results = { sellers: [], products: [] };
+
+  // 1. Produit + prix (ex: "robe 15000")
+  if (priceMatch) {
+    const productName = priceMatch[1].trim();
+    const targetPrice = Number(priceMatch[2]);
+    const min = targetPrice * 0.95;
+    const max = targetPrice * 1.05;
+
+    const { data: products } = await db.from(TABLES.PRODUCTS)
+      .select('*, sellers!inner(full_name, phone, quartier, ville, is_blocked)')
+      .ilike('name', `%${productName}%`)
+      .gte('price', min).lte('price', max)
+      .eq('is_active', true)
+      .eq('sellers.is_blocked', false);
+
+    results.products = products || [];
+    renderSearchResults(results, `Produits "${productName}" autour de ${formatPrice(targetPrice)} FCFA (±5%)`);
+    return;
+  }
+
+  // 2. Quartier + catégorie (ex: "moungali basket")
+  let detectedCat = null;
+  let detectedQuartier = null;
+
+  for (const [keyword, catId] of Object.entries(categoryKeywords)) {
+    if (q.includes(keyword)) {
+      detectedCat = catId;
+      detectedQuartier = q.replace(keyword, '').trim();
+      break;
+    }
+  }
+
+  if (detectedCat && detectedQuartier) {
+    const { data: sellers } = await db.from(TABLES.SELLERS)
+      .select('*').eq('category', detectedCat)
+      .ilike('quartier', `%${detectedQuartier}%`)
+      .eq('is_blocked', false);
+
+    results.sellers = sellers || [];
+    renderSearchResults(results, `Vendeurs de ${ALL_CATEGORIES[detectedCat]} à ${detectedQuartier}`);
+    return;
+  }
+
+  // 3. Juste quartier (ex: "moungali") -> tous vendeurs du quartier
+  const { data: sellersByQuartier } = await db.from(TABLES.SELLERS)
+    .select('*').ilike('quartier', `%${q}%`).eq('is_blocked', false);
+
+  // 4. Ville (ex: "brazzaville")
+  const { data: sellersByVille } = await db.from(TABLES.SELLERS)
+    .select('*').ilike('ville', `%${q}%`).eq('is_blocked', false);
+
+  // 5. Nom vendeur
+  const { data: sellersByName } = await db.from(TABLES.SELLERS)
+    .select('*').ilike('full_name', `%${q}%`).eq('is_blocked', false);
+
+  // 6. Nom produit
+  const { data: productsByName } = await db.from(TABLES.PRODUCTS)
+    .select('*, sellers!inner(full_name, phone, quartier, ville, is_blocked)')
+    .ilike('name', `%${q}%`).eq('is_active', true)
+    .eq('sellers.is_blocked', false);
+
+  // Fusionner vendeurs (sans doublons)
+  const allSellers = [...(sellersByQuartier || []), ...(sellersByVille || []), ...(sellersByName || [])];
+  const uniqueSellers = allSellers.filter((s, i, arr) => arr.findIndex(x => x.id === s.id) === i);
+
+  results.sellers = uniqueSellers;
+  results.products = productsByName || [];
+
+  renderSearchResults(results, `Résultats pour "${query}"`);
+}
+
+// Afficher résultats de recherche
+function renderSearchResults(results, title) {
+  document.getElementById('searchResultsTitle').innerText = title;
+  const container = document.getElementById('searchResults');
+
+  if (results.sellers.length === 0 && results.products.length === 0) {
+    container.innerHTML = '<p style="text-align:center;padding:30px;color:#888;">Aucun résultat trouvé.<br>Essayez un autre mot-clé.</p>';
+    return;
+  }
+
+  let html = '';
+
+  if (results.sellers.length > 0) {
+    html += `<h3 style="padding:10px 0;font-size:16px;color:#1677FF;">Vendeurs (${results.sellers.length})</h3>`;
+    html += results.sellers.map(s => `
+      <div class="seller-card" style="margin-bottom:12px;">
+        <img src="${s.photo || 'https://images.unsplash.com/photo-1556740749-887f6717d7e4?q=80&w=400'}"
+             class="seller-image" onerror="this.src='https://images.unsplash.com/photo-1556740749-887f6717d7e4?q=80&w=400'">
+        <div class="seller-info">
+          <h3>${s.full_name}</h3>
+          <p class="seller-location">📍 ${s.quartier}, ${s.ville}</p>
+          <p class="seller-desc">${s.description || ''}</p>
+          <div class="seller-actions">
+            <button class="view-btn" onclick="openSellerProductsFromSearch('${s.id}')">Voir publications</button>
+            <a href="https://wa.me/${s.phone}" target="_blank" class="contact-btn">Contacter</a>
+          </div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  if (results.products.length > 0) {
+    html += `<h3 style="padding:10px 0;font-size:16px;color:#1677FF;">Produits (${results.products.length})</h3>`;
+    html += results.products.map(p => `
+      <div class="product-card" style="margin-bottom:12px;">
+        <img src="${p.image}" onerror="this.src='https://images.unsplash.com/photo-1556740749-887f6717d7e4?q=80&w=600'">
+        <div class="product-content">
+          <h3>${p.name}</h3>
+          <p style="color:#888;font-size:13px;">Par: ${p.sellers?.full_name || p.seller_name}</p>
+          <p class="product-price">${formatPrice(p.price)} FCFA</p>
+          <a href="https://wa.me/${p.sellers?.phone || p.seller_phone}" target="_blank" class="contact-btn-product">
+            Contacter le vendeur
+          </a>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  container.innerHTML = html;
+}
+
+// Ouvrir publications depuis recherche
+async function openSellerProductsFromSearch(sellerId) {
+  const { data: seller } = await db.from(TABLES.SELLERS).select('*').eq('id', sellerId).single();
+  if (!seller) return;
+  window.currentViewedSeller = seller;
+  const type = Object.keys(CATEGORIES_A).includes(seller.category) ? 'A' : 'B';
+  currentCategoryType = type;
+  await openSellerProducts(sellerId, type);
+}
+
+// ==================== ADMIN.JS ====================
+
+
+let isAdmin = false;
+
+// Connexion admin — vérification sécurisée via Supabase
+async function adminLogin() {
+  const code = document.getElementById('adminCode').value.trim();
+  const pin  = document.getElementById('adminPin').value.trim();
+
+  if (!code || !pin) {
+    showToast('Remplissez tous les champs', 'error');
+    return;
+  }
+
+  try {
+    const { data, error } = await db
+      .from('admin_credentials')
+      .select('id')
+      .eq('code',     code)
+      .eq('pin_hash', hashPin(pin))
+      .single();
+
+    if (error || !data) {
+      showToast('Identifiants admin incorrects', 'error');
+      return;
+    }
+
+    isAdmin = true;
+    showPage('adminDashboard');
+    loadAdminStats();
+
+  } catch (e) {
+    console.error('adminLogin error:', e);
+    showToast('Erreur de connexion', 'error');
+  }
+}
+
+// Charger stats admin
+async function loadAdminStats() {
+  // Nombre de vendeurs
+  const { count: totalSellers } = await db.from(TABLES.SELLERS)
+    .select('*', { count: 'exact', head: true });
+
+  // Vendeurs aujourd'hui
+  const today = new Date().toISOString().split('T')[0];
+  const { count: todaySellers } = await db.from(TABLES.SELLERS)
+    .select('*', { count: 'exact', head: true })
+    .gte('created_at', today);
+
+  // Visites
+  const { count: todayVisits } = await db.from(TABLES.VISITORS)
+    .select('*', { count: 'exact', head: true })
+    .gte('date', today);
+
+  const { count: totalVisits } = await db.from(TABLES.VISITORS)
+    .select('*', { count: 'exact', head: true });
+    
+  // Commandes
+  const { count: todayOrders } = await db.from(TABLES.ORDERS)
+    .select('*', { count: 'exact', head: true })
+    .gte('created_at', today);
+
+  const { count: totalOrders } = await db.from(TABLES.ORDERS)
+    .select('*', { count: 'exact', head: true });
+
+  document.getElementById('statTotalSellers').innerText = totalSellers || 0;
+  document.getElementById('statTodaySellers').innerText = todaySellers || 0;
+  document.getElementById('statTodayVisits').innerText = todayVisits || 0;
+  document.getElementById('statTotalVisits').innerText = totalVisits || 0;
+  document.getElementById('statTodayOrders').innerText = todayOrders || 0;
+  document.getElementById('statTotalOrders').innerText = totalOrders || 0;
+}
+
+// Charger liste vendeurs admin
+async function loadSellersList() {
+  const ville = document.getElementById('filterVille').value;
+  const quartier = document.getElementById('filterQuartier').value.trim();
+
+  let query = db.from(TABLES.SELLERS).select('*').order('created_at', { ascending: false });
+  if (ville) query = query.ilike('ville', `%${ville}%`);
+  if (quartier) query = query.ilike('quartier', `%${quartier}%`);
+
+  const { data: sellers } = await query;
+
+  const tbody = document.getElementById('sellersTableBody');
+  if (!sellers || sellers.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:20px;">Aucun vendeur.</td></tr>';
+    return;
+  }
+
+  tbody.innerHTML = sellers.map(s => {
+    const dynamisme = getDynamisme(s.last_published);
+    const dynamColor = { vert: '#52c41a', jaune: '#faad14', rouge: '#ff4d4f', noir: '#333' }[dynamisme];
+
+    return `
+      <tr>
+        <td>${s.code}</td>
+        <td>${s.full_name}<br><small>${s.ville} - ${s.quartier}</small></td>
+        <td>${ALL_CATEGORIES[s.category] || s.category}</td>
+        <td><span style="color:${dynamColor};font-weight:700;">● ${dynamisme}</span></td>
+        <td><span style="color:${s.subscription_status === 'en_cours' ? '#52c41a' : '#ff4d4f'}">
+          ${s.subscription_status === 'en_cours' ? 'En cours' : 'Expiré'}
+        </span></td>
+        <td>
+          <button onclick="toggleBlock('${s.id}', ${s.is_blocked})"
+            style="background:${s.is_blocked ? '#52c41a' : '#ff4d4f'};color:white;border:none;padding:5px 10px;border-radius:8px;cursor:pointer;">
+            ${s.is_blocked ? 'Débloquer' : 'Bloquer'}
+          </button>
+        </td>
+      </tr>
+    `;
+  }).join('');
+}
+
+// Calculer dynamisme
+function getDynamisme(lastPublished) {
+  if (!lastPublished) return 'noir';
+  const diff = (new Date() - new Date(lastPublished)) / (1000 * 60 * 60 * 24);
+  if (diff <= 1) return 'vert';
+  if (diff <= 3) return 'jaune';
+  if (diff <= 7) return 'rouge';
+  return 'noir';
+}
+
+// Supprimer compte vendeur définitivement
+async function deleteSellerAccount() {
+  const code = document.getElementById('deleteSellerCode').value.trim().toUpperCase();
+
+  if (!code) {
+    showToast('Entrez un code vendeur', 'error');
+    return;
+  }
+
+  // Vérifier que le vendeur existe
+  const { data: seller, error } = await db.from(TABLES.SELLERS)
+    .select('*').eq('code', code).single();
+
+  if (error || !seller) {
+    showToast('Code vendeur introuvable', 'error');
+    return;
+  }
+
+  if (!confirm(`Supprimer définitivement le compte de ${seller.full_name} (${code}) ?\n\nCette action est irréversible !`)) {
+    return;
+  }
+
+  try {
+    // Supprimer les produits du vendeur
+    await db.from(TABLES.PRODUCTS).delete().eq('seller_id', seller.id);
+    // Supprimer les promos du vendeur
+    await db.from(TABLES.PROMOS).delete().eq('seller_id', seller.id);
+    // Supprimer les commandes du vendeur
+    await db.from(TABLES.ORDERS).delete().eq('seller_id', seller.id);
+    // Supprimer le compte vendeur
+    await db.from(TABLES.SELLERS).delete().eq('id', seller.id);
+
+    document.getElementById('deleteSellerCode').value = '';
+    showToast(`Compte ${code} supprimé définitivement`, 'success');
+    loadAdminStats();
+  } catch (e) {
+    showToast('Erreur lors de la suppression', 'error');
+    console.error(e);
+  }
+}
+async function toggleBlock(sellerId, isBlocked) {
+  const action = isBlocked ? 'débloquer' : 'bloquer';
+  if (!confirm(`Voulez-vous ${action} ce vendeur ?`)) return;
+
+  await db.from(TABLES.SELLERS).update({ is_blocked: !isBlocked }).eq('id', sellerId);
+  showToast(`Vendeur ${isBlocked ? 'débloqué' : 'bloqué'}`, 'success');
+  loadSellersList();
+}
+
+// Charger positions par catégorie
+async function loadPositions(catId) {
+  const { data: sellers } = await db.from(TABLES.SELLERS)
+    .select('*').eq('category', catId).eq('is_blocked', false)
+    .order('position', { ascending: true });
+
+  const list = document.getElementById('positionsList');
+  if (!sellers || sellers.length === 0) {
+    list.innerHTML = '<p style="padding:10px;color:#888;">Aucun vendeur.</p>';
+    return;
+  }
+
+  list.innerHTML = sellers.map((s, i) => `
+    <div class="position-item">
+      <span class="pos-number">#${i + 1}</span>
+      <span class="pos-name">${s.full_name} (${s.code})</span>
+      <div class="pos-controls">
+        <button onclick="moveUp('${s.id}', '${catId}')" ${i === 0 ? 'disabled' : ''}>▲</button>
+        <button onclick="moveDown('${s.id}', '${catId}')" ${i === sellers.length - 1 ? 'disabled' : ''}>▼</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+// Monter position
+async function moveUp(sellerId, catId) {
+  const { data: sellers } = await db.from(TABLES.SELLERS)
+    .select('id, position').eq('category', catId).order('position');
+
+  const idx = sellers.findIndex(s => s.id === sellerId);
+  if (idx <= 0) return;
+
+  const current = sellers[idx];
+  const prev = sellers[idx - 1];
+
+  await db.from(TABLES.SELLERS).update({ position: prev.position }).eq('id', current.id);
+  await db.from(TABLES.SELLERS).update({ position: current.position }).eq('id', prev.id);
+
+  loadPositions(catId);
+}
+
+// Descendre position
+async function moveDown(sellerId, catId) {
+  const { data: sellers } = await db.from(TABLES.SELLERS)
+    .select('id, position').eq('category', catId).order('position');
+
+  const idx = sellers.findIndex(s => s.id === sellerId);
+  if (idx >= sellers.length - 1) return;
+
+  const current = sellers[idx];
+  const next = sellers[idx + 1];
+
+  await db.from(TABLES.SELLERS).update({ position: next.position }).eq('id', current.id);
+  await db.from(TABLES.SELLERS).update({ position: current.position }).eq('id', next.id);
+
+  loadPositions(catId);
+}
+
+// ==================== APP.JS ====================
+
+// Cache des données
+const cache = {
+  sellers: {},
+  products: {},
+  ttl: 5 * 60 * 1000 // 5 minutes
+};
+
+function getCached(key) {
+  const item = cache[key];
+  if (!item) return null;
+  if (Date.now() - item.time > cache.ttl) {
+    delete cache[key];
+    return null;
+  }
+  return item.data;
+}
+
+function setCached(key, data) {
+  cache[key] = { data, time: Date.now() };
+}
+
+let pageHistory = [];
+
+function showPage(pageId) {
+  if (pageId !== 'homePage') {
+    pageHistory.push(pageId);
+  } else {
+    pageHistory = [];
+  }
+
+  document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
+  const page = document.getElementById(pageId);
+  if (page) {
+    page.style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  const headerTitles = document.getElementById('headerTitles');
+  const searchBox = document.querySelector('.search-box');
+  if (headerTitles && searchBox) {
+    if (pageId === 'homePage') {
+      headerTitles.classList.remove('hidden');
+      searchBox.classList.remove('at-top');
+    } else {
+      headerTitles.classList.add('hidden');
+      searchBox.classList.add('at-top');
+    }
+  }
+}
+
+function goBack() {
+  pageHistory.pop();
+  const prev = pageHistory.pop() || 'homePage';
+  showPage(prev);
+}
+
+window.addEventListener('DOMContentLoaded', async () => {
+  showPage('homePage');
+  await checkSession();
+  updateProfileIcon();
+  recordVisit();
+  initBanner();
+});
+
+function initBanner() {
+  // 10 photos : 6 pour clients, 4 pour vendeurs
+  const bannerImages = [
+    // === CLIENTS (60%) ===
+    {
+      url: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1200',
+      title: '🛍️ Mode & Tendances',
+      subtitle: 'Les meilleures boutiques de Brazzaville vous attendent'
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?q=80&w=1200',
+      title: '💄 Beauté & Cosmétiques',
+      subtitle: 'Les meilleures marques à prix imbattables'
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=1200',
+      title: '👟 Chaussures & Basket',
+      subtitle: 'Des styles pour toutes les occasions'
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?q=80&w=1200',
+      title: '🔥 Promos Exclusives',
+      subtitle: 'Des réductions exceptionnelles chaque jour !'
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?q=80&w=1200',
+      title: '👗 Vêtements Femme',
+      subtitle: 'Robes, ensembles tendance — livraison à domicile'
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=1200',
+      title: '🚚 Commandez Facilement',
+      subtitle: 'Recevez vos achats directement chez vous à Brazzaville'
+    },
+    // === VENDEURS (40%) ===
+    {
+      url: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?q=80&w=1200',
+      title: '🏪 Ouvrez Votre Boutique Gratuite !',
+      subtitle: 'Inscription 100% gratuite — Gardez 100% de vos ventes'
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1573408301185-9519f94816b5?q=80&w=1200',
+      title: '📈 Développez Votre Activité',
+      subtitle: 'Touchez des milliers de clients à Brazzaville et au Congo'
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1553729459-efe14ef6055d?q=80&w=1200',
+      title: '💰 Zéro Commission !',
+      subtitle: 'Vendez plus, gagnez plus — Rejoignez Marché Moboro'
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1200',
+      title: '🤝 Rejoignez Notre Communauté',
+      subtitle: '500 FCFA/sem seulement après la période promo — Inscrivez-vous maintenant !'
+    }
+  ];
+
+  let currentSlide = 0;
+  let autoSlide;
+  const bannerImg = document.getElementById('bannerImg');
+  const bannerTitle = document.getElementById('bannerTitle');
+  const bannerSubtitle = document.getElementById('bannerSubtitle');
+  const dotsContainer = document.getElementById('bannerDots');
+
+  if (!bannerImg) return;
+
+  // Précharger les images
+  bannerImages.forEach(slide => {
+    const img = new Image();
+    img.src = slide.url;
+  });
+
+  // Créer dots
+  dotsContainer.innerHTML = bannerImages.map((_, i) =>
+    `<span class="dot ${i === 0 ? 'active' : ''}" onclick="goToSlide(${i})"></span>`
+  ).join('');
+
+  function updateBanner(index) {
+    const slide = bannerImages[index];
+    bannerImg.style.opacity = '0';
+    setTimeout(() => {
+      bannerImg.src = slide.url;
+      bannerTitle.innerText = slide.title;
+      bannerSubtitle.innerText = slide.subtitle;
+      bannerImg.style.opacity = '1';
+    }, 300);
+    document.querySelectorAll('.dot').forEach((dot, i) => {
+      dot.classList.toggle('active', i === index);
+    });
+  }
+
+  window.goToSlide = function(i) {
+    currentSlide = i;
+    updateBanner(currentSlide);
+    // Reset timer
+    clearInterval(autoSlide);
+    autoSlide = setInterval(nextSlide, 4000);
+  };
+
+  function nextSlide() {
+    currentSlide = (currentSlide + 1) % bannerImages.length;
+    updateBanner(currentSlide);
+  }
+
+  // Lancer le défilement automatique
+  autoSlide = setInterval(nextSlide, 4000);
+
+  // Swipe tactile
+  let touchStartX = 0;
+  bannerImg.addEventListener('touchstart', e => {
+    touchStartX = e.changedTouches[0].screenX;
+  });
+  bannerImg.addEventListener('touchend', e => {
+    const diff = touchStartX - e.changedTouches[0].screenX;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) nextSlide();
+      else { currentSlide = (currentSlide - 1 + bannerImages.length) % bannerImages.length; updateBanner(currentSlide); }
+    }
+  });
+}
+
+function openAdmin() {
+  showPage('adminLoginPage');
+}
+
+
+</script>
+
+</body>
+</html>
